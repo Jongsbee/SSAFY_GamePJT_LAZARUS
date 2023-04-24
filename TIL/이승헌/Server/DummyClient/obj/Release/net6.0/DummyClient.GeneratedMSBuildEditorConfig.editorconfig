@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DummyClient
-build_property.ProjectDir = D:\C#Learn\c-testproject\Server\DummyClient\
+build_property.ProjectDir = D:\C#Learn\S08P31A106\TIL\이승헌\Server\DummyClient\

@@ -10,7 +10,6 @@ namespace Server // Note: actual namespace depends on the project name.
         public static GameRoom Room = new GameRoom();
         static void Main(string[] args)
         {
-            PacketManager.Instance.Register();
             // DNS(Domain name system) 사용
             // 서버주소를 하드코딩하는건 좋지 못함 => 도메인 등록하는것이 좋다 ( 관리 용이 )
             string host = Dns.GetHostName();

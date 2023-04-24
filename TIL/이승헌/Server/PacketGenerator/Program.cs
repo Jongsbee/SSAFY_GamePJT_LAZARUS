@@ -1,5 +1,4 @@
-﻿using System.Threading.Channels;
-using System.Xml;
+﻿using System.Xml;
 
 namespace PacketGenerator // Note: actual namespace depends on the project name.
 {
@@ -23,6 +22,8 @@ namespace PacketGenerator // Note: actual namespace depends on the project name.
 
             if (args.Length >= 1)
                 pdlPath = args[0];
+
+            //Console.WriteLine(pdlPath);
             
             using (XmlReader r = XmlReader.Create(pdlPath, settings))
             {

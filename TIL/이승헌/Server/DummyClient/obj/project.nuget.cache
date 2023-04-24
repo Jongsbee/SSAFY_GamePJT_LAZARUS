@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "61aQHQM+g45eTI4yz8G/MGdhlruEIwgaS068UlFVd4Kov5N0zz3l2MLkSriMojQDvyIHGKSXPSLThNIDbIhYnA==",
+  "dgSpecHash": "IGbYYmQedIpE5aCUet8Lg/RwA2kr/XmRFzTzTKy43Og3q5sAzjSX2TxGc9ZQzC5pP0fipkaB7DxeF2bUiLMGkQ==",
   "success": true,
-  "projectFilePath": "D:\\C#Learn\\c-testproject\\Server\\DummyClient\\DummyClient.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\DummyClient\\DummyClient.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

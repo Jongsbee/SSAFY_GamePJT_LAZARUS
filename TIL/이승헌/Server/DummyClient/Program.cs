@@ -10,7 +10,6 @@ namespace DummyClient // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            PacketManager.Instance.Register();
             //DNS (Domain Name System)
             string host = Dns.GetHostName();
             var ipHost = Dns.GetHostEntry(host);

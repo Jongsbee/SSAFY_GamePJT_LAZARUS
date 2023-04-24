@@ -1,0 +1,15 @@
+D:\C#Learn\c-testproject\Server\PacketGenerator\bin\Debug\PacketGenerator.exe
+D:\C#Learn\c-testproject\Server\PacketGenerator\bin\Debug\PacketGenerator.deps.json
+D:\C#Learn\c-testproject\Server\PacketGenerator\bin\Debug\PacketGenerator.runtimeconfig.json
+D:\C#Learn\c-testproject\Server\PacketGenerator\bin\Debug\PacketGenerator.dll
+D:\C#Learn\c-testproject\Server\PacketGenerator\bin\Debug\PacketGenerator.pdb
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.AssemblyReference.cache
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.CoreCompileInputs.cache
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.dll
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\refint\PacketGenerator.dll
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.pdb
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
+D:\C#Learn\c-testproject\Server\PacketGenerator\obj\Debug\ref\PacketGenerator.dll

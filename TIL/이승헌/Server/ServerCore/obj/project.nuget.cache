@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6mwyf1ToWoKUN8wPxOGQa78REPzFqsCiQSCtlqYCmi+EICE4XZPIu8Kx6zwOLx2pMA2QAMpQ3S2yWh8SpHV65Q==",
+  "success": true,
+  "projectFilePath": "D:\\C#Learn\\c-testproject\\Server\\ServerCore\\ServerCore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}

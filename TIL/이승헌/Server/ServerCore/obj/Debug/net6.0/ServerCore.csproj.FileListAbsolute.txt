@@ -1,0 +1,39 @@
+D:\C#Learn\Server\ServerCore\bin\Debug\net6.0\ServerCore.exe
+D:\C#Learn\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+D:\C#Learn\Server\ServerCore\bin\Debug\net6.0\ServerCore.runtimeconfig.json
+D:\C#Learn\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+D:\C#Learn\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
+D:\C#Learn\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
+D:\C#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+D:\C#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+D:\C#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+D:\C#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll

@@ -14,7 +14,8 @@ public class GameRoom
 
         lock (_lock)
         {
-            
+            foreach (var s in _sessions)
+                s.Send(segment);
         }
         
     }

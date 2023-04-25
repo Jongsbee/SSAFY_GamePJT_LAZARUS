@@ -22,3 +22,15 @@ D:\C#Learn\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerC
 D:\C#Learn\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\refint\ServerCore.dll
 D:\C#Learn\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.pdb
 D:\C#Learn\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ref\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Release\net6.0\ServerCore.deps.json
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Release\net6.0\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Release\net6.0\ServerCore.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.csproj.AssemblyReference.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.AssemblyInfo.cs
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\refint\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ServerCore.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Release\net6.0\ref\ServerCore.dll

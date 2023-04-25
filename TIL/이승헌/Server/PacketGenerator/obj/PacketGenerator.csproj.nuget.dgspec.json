@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj": {}
+    "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj": {}
   },
   "projects": {
-    "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj": {
+    "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
         "projectName": "PacketGenerator",
-        "projectPath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\obj\\",
+        "projectPath": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
+        "packagesPath": "C:\\Users\\SSAFY\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\SSAFY\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +23,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,12 +51,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.15, 6.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.15, 6.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.15, 6.0.15]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.15, 6.0.15]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

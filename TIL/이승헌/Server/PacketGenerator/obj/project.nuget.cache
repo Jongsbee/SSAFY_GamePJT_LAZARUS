@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "D7zecNQ78ldznmRGYdmXNN0vm65XlzqV993jNOGxdCGrR6AwMJeIuw9A7oSLvnrdIien8RWNoQdQWskvYWIqcA==",
+  "dgSpecHash": "W0d20/mjtmq2hVKx4lqtIe/2UV4JNdnoHFdJ5uFp5yPwAvlNTXbCoKRCAjklc88AWt4SPs0oHrfQytNWe2LaNg==",
   "success": true,
-  "projectFilePath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\PacketGenerator\\PacketGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
+  ],
   "logs": []
 }

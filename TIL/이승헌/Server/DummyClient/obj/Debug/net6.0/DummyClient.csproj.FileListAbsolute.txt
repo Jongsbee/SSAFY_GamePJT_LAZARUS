@@ -49,3 +49,21 @@ C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\DummyClient\o
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\DummyClient\obj\Debug\net6.0\DummyClient.pdb
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\DummyClient\obj\Debug\net6.0\DummyClient.genruntimeconfig.cache
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\DummyClient\obj\Debug\net6.0\ref\DummyClient.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\DummyClient.exe
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\DummyClient.deps.json
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\DummyClient.runtimeconfig.json
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\DummyClient.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\DummyClient.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\bin\Debug\net6.0\ServerCore.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.AssemblyReference.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.AssemblyInfoInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.AssemblyInfo.cs
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.CoreCompileInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.CopyComplete
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\refint\DummyClient.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\DummyClient.genruntimeconfig.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\DummyClient\obj\Debug\net6.0\ref\DummyClient.dll

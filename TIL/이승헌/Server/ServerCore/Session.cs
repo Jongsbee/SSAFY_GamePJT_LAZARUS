@@ -11,6 +11,7 @@ public abstract class PacketSession : Session
     public sealed override int OnRecv(ArraySegment<byte> buffer)
     {
         int processLen = 0;
+        int packetCount = 0;
 
         while (true)
         {
@@ -25,13 +26,17 @@ public abstract class PacketSession : Session
             
             // 여기까지 왔으면 어떻게든 패킷 조립 가능
             OnRecvPacket(new ArraySegment<byte>(buffer.Array, buffer.Offset, dataSize));
-
+            packetCount++;
+            
             processLen += dataSize;
             buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
             
         }
         
-        return 0;
+        if(packetCount > 1)
+            Console.WriteLine($"패킷 모아 보내기 : {packetCount}");
+        
+        return processLen;
     }
 
     public abstract void OnRecvPacket(ArraySegment<byte> buffer);
@@ -42,7 +47,7 @@ public abstract class Session
     private Socket _socket;
     private int _disconnected = 0;
 
-    private RecvBuffer _recvBuffer = new RecvBuffer(1024);
+    private RecvBuffer _recvBuffer = new RecvBuffer(65535);
 
     private object _lock = new object();
     List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
@@ -74,12 +79,27 @@ public abstract class Session
         ResisterRecv();
     }
 
+    public void Send(List<ArraySegment<byte>> sendBuffList)
+    {
+        if (sendBuffList.Count == 0)
+            return;
+        
+        lock (_lock)
+        {
+            foreach (var sendBuff in sendBuffList)
+                _sendQueue.Enqueue(sendBuff);
+
+            if(_pendingList.Count == 0)
+                RegisterSend();
+            
+        }
+    }
     public void Send(ArraySegment<byte> sendBuff)
     {
         lock (_lock)
         {
             _sendQueue.Enqueue(sendBuff);
-            if(_pendingList.Count == 0)
+            if (_pendingList.Count == 0)
                 RegisterSend();
         }
     }
@@ -190,6 +210,7 @@ public abstract class Session
                 // Write 커서 이동
                 if (_recvBuffer.OnWrite(args.BytesTransferred) == false)
                 {
+                    Console.WriteLine("Write 커서 이동 Disconnected");
                     DisConnect();
                     return;
                 }
@@ -198,6 +219,7 @@ public abstract class Session
                 var processLen = OnRecv(_recvBuffer.ReadSegment);
                 if (processLen < 0 || _recvBuffer.DataSize < processLen)
                 {
+                    Console.WriteLine("컨텐츠 Disconnected");
                     DisConnect();
                     return;
                 }
@@ -205,6 +227,7 @@ public abstract class Session
                 // Read 커서 이동
                 if (_recvBuffer.OnRead(processLen) == false)
                 {
+                    Console.WriteLine("Read Disconnected");
                     DisConnect();
                     return;
                 }
@@ -218,6 +241,7 @@ public abstract class Session
         }
         else
         {
+            Console.WriteLine("OnRecvComplete Disconnected");
             // Todo Disconnect
             DisConnect();
             

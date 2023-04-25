@@ -37,3 +37,15 @@ C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\ob
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
 C:\Users\mylif\OneDrive\바탕 화면\c#Learn\c-testproject\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+C:\Users\SSAFY\Desktop\S08P31A106\TIL\이승헌\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll

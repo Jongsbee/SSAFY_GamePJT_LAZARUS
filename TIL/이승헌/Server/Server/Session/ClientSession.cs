@@ -12,7 +12,7 @@ public class ClientSession : PacketSession
     {
         Console.WriteLine($"OnConnected { endPoint }");
         
-        Program.Room.Enter(this);
+        Program.Room.Push(() => Program.Room.Enter(this));
     }
 
     public override void OnRecvPacket(ArraySegment<byte> buffer)
@@ -22,7 +22,7 @@ public class ClientSession : PacketSession
 
     public override void OnSend(int numOfBytes)
     {
-        Console.WriteLine($"Transferred bytes: {numOfBytes}");
+        //Console.WriteLine($"Transferred bytes: {numOfBytes}");
     }
 
     public override void OnDisconnected(EndPoint endPoint)
@@ -30,8 +30,14 @@ public class ClientSession : PacketSession
         SessionManager.instance.Remove(this);
         if (Room != null)
         {
-            Room.Leave(this);
+            GameRoom room = Room;
+            room.Push(() =>
+            {
+                room.Leave(this);
+                
+            });
             Room = null;
+            
         }
             
         Console.WriteLine($"OnDisconnected { endPoint }");

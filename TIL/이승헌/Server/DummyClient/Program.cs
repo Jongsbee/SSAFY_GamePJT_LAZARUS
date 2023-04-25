@@ -19,7 +19,8 @@ namespace DummyClient // Note: actual namespace depends on the project name.
             Connector connector = new Connector();
             
             connector.Connect(endPoint, 
-                () => { return SessionManager.Instance.Generate();}, 10);
+                () => { return SessionManager.Instance.Generate();}
+                , 100);
 
             while (true)
             {

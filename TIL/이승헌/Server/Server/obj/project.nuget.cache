@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FmxXKNEB7Y2ptfT8idR3+xegnvm2B1lLlT4Uqqbofdq/+n2SiuNx7Vhq8mUspGS5FUfFGoSefA2GSFtPbmT3Yg==",
+  "dgSpecHash": "RgSovQY9+xm9EN11ruku6WnkQpD6zk3yc9H5MKjtPYtKmCvTHmHM7dxU1X0D+e1KFT4sT6gcXwyqJfG/l1gk9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\Server\\Server.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\Server\\Server.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

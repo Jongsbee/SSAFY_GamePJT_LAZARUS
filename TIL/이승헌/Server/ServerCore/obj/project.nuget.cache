@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b2W9a0Cey8MMwk3ozq1RsVcQmtS6HuLOyhF1dkQCtBtYgc1OCxNHOJFMoDrgIiwY8eBBe+gOhldJyTiDYxXQEg==",
+  "dgSpecHash": "p31QSRA8FlTz2T7b6R6KkG7mdE+PWHqjnmqz21C7FTLvL2mz0jIdqdFHGHYDMCbHE5FhLJ+QmqA7c0uNZP71cg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SSAFY\\Desktop\\S08P31A106\\TIL\\이승헌\\Server\\ServerCore\\ServerCore.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
-    "C:\\Users\\SSAFY\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\C#Learn\\S08P31A106\\TIL\\이승헌\\Server\\ServerCore\\ServerCore.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

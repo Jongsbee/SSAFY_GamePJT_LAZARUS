@@ -6,7 +6,6 @@ using Cinemachine;
 public class AimController : MonoBehaviour
 {
     public Transform aimTarget; // Ȱ ���� ��ġ�� ��Ÿ���� ������Ʈ
-    public Transform lookTarget; // ĳ���Ͱ� �ٶ� ��ġ�� ��Ÿ���� ������Ʈ
     public float maxDistance = 100f; // ����ĳ��Ʈ�� Ž���� �ִ� �Ÿ�
     public float rotateSpeed = 5f; // ȸ�� �ӵ�
     public GameObject player;
@@ -15,7 +14,7 @@ public class AimController : MonoBehaviour
     private RaycastHit hitInfo; // ����ĳ��Ʈ���� ��ȯ�� ����
 
     
-
+    
     //Ȱ ��� ����, ĳ���� ȸ�� ����
     Vector3 lookDirection;
 
@@ -27,8 +26,10 @@ public class AimController : MonoBehaviour
 
     private void Update()
     {
-        // ����ĳ��Ʈ�� ���� ���� ��ġ ���
-        if (Physics.Raycast(virtualCamera.transform.position, virtualCamera.transform.forward, out hitInfo, maxDistance))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+       
+        // 조준시 바라보는 방향
+        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo, maxDistance))
         {
             aimTarget.position = hitInfo.point;
             //Debug.Log(aimTarget.position);

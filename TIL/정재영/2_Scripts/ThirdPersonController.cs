@@ -1,4 +1,5 @@
- using UnityEngine;
+
+using UnityEngine;
 using Cinemachine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -134,8 +135,9 @@ namespace StarterAssets
         public Transform arrowPoint;
         public Transform aimTarget;
         private CinemachineVirtualCamera aimCamera;
+        private GameObject crossHair;
         public float aimDistance = 1f;
-        public float maxDistance = 1000f; // 레이캐스트가 탐색할 최대 거리
+        public float maxDistance = 10f; // 레이캐스트가 탐색할 최대 거리
 
         private const float _threshold = 0.01f;
 
@@ -172,6 +174,8 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             nowAnim = GetComponent<Animator>();
             right_WeaponSocket = GameObject.Find("R_WeaponSocket");
+            crossHair = GameObject.Find("AimTarget");
+            crossHair.SetActive(false);
 
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
@@ -210,6 +214,7 @@ namespace StarterAssets
                 _animator.SetBool("Shooting", _input.IsShooting);
                 playerFollowCamera.SetActive(false);
                 playerAimCamera.SetActive(true);
+                crossHair.SetActive(true);
                 // 조준 카메라 찾는 곳
                 aimCamera = GameObject.Find("PlayerAimCamera").GetComponent<CinemachineVirtualCamera>();
                 Debug.DrawLine(aimCamera.transform.position, aimCamera.transform.forward * 150f, Color.red);
@@ -221,6 +226,7 @@ namespace StarterAssets
                 _animator.SetBool("Shooting", false);
                 playerFollowCamera.SetActive(true);
                 playerAimCamera.SetActive(false);
+                crossHair.SetActive(false);
             }
         }
         //ArrowFire
@@ -246,20 +252,15 @@ namespace StarterAssets
         public LayerMask ArrowDetectionLayer;
         public void Shoot()
         {
-            RaycastHit hitInfo; // 레이캐스트에서 반환된 정보
-            if (Physics.Raycast(aimCamera.transform.position, aimCamera.transform.forward, out hitInfo, maxDistance, ArrowDetectionLayer))
-            {
-                aimTarget.position = hitInfo.point;
-            }
-            else
-            {
-                aimTarget.position = aimCamera.transform.forward * 100f;
-            }
-           
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            aimTarget.position = transform.position + ray.direction * 100f;
+
             Vector3 fireDirection = (aimTarget.position - arrowPoint.position).normalized;
 
-            GameObject arrow = Instantiate(arrowObject, arrowPoint.position + transform.forward, Quaternion.LookRotation(fireDirection));
-            arrow.GetComponent<Rigidbody>().AddForce(-fireDirection * 150f, ForceMode.VelocityChange);
+            //GameObject arrow = Instantiate(arrowObject, arrowPoint.position + transform.forward, Quaternion.LookRotation(fireDirection));
+            GameObject arrow = Instantiate(arrowObject, arrowPoint.position, Quaternion.LookRotation(fireDirection));
+            arrow.GetComponent<Arrow>().SetUp(transform.position); // 공격한 플레이어 위치값 전달하기 위해 추가 (정규)
+            arrow.GetComponent<Rigidbody>().AddForce(fireDirection * 200f, ForceMode.Impulse);
 
             //ArrowSocket Back
             ArrowSocket_Draw(false);
@@ -486,8 +487,8 @@ namespace StarterAssets
                 {
                     Item item = nearObject.GetComponent<Item>();
                     // 인덱스가 0이면 활, 2이면 근접.
-                    int weaponIndex = item.value;
-                    hasWeapons[weaponIndex] = true;
+                    //int weaponIndex = item.value;
+                    //hasWeapons[weaponIndex] = true;
 
                     Destroy(nearObject);
                 }

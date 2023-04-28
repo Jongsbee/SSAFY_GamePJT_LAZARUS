@@ -21,7 +21,7 @@ public class AimController : MonoBehaviour
     private void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        player = GameObject.Find("Player_Test");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()

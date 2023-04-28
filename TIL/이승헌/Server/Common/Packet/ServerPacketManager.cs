@@ -31,8 +31,11 @@ public class PacketManager
     public void Register()
     {
  
-        _onRecv.Add((ushort)PacketId.C_Chat, MakePacket<C_Chat>);
-        _handler.Add((ushort)PacketId.C_Chat, PacketHandler.C_ChatHandler);
+        _onRecv.Add((ushort)PacketId.C_LeaveGame, MakePacket<C_LeaveGame>);
+        _handler.Add((ushort)PacketId.C_LeaveGame, PacketHandler.C_LeaveGameHandler);
+ 
+        _onRecv.Add((ushort)PacketId.C_Move, MakePacket<C_Move>);
+        _handler.Add((ushort)PacketId.C_Move, PacketHandler.C_MoveHandler);
 
     }
 

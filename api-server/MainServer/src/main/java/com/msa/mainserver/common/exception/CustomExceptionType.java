@@ -8,8 +8,9 @@ public enum CustomExceptionType {
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "E003", "회원가입 되어있지 않은 사용자입니다"),
 	WRONG_PASSWORD_EXCEPTION(HttpStatus.UNAUTHORIZED ,"E004", "잘못된 패스워드 입니다"),
 	DUPLICATE_EMAIL_EXCEPTION(HttpStatus.CONFLICT, "E005", "이미 사용되고 있는 이메일입니다"),
-	DUPLICATE_NICKNAME_EXCEPTION(HttpStatus.CONFLICT, "E005", "이미 사용되고 있는 닉네임 입니다"),
-	NOT_LOGINED_EXCEPTION(HttpStatus.BAD_REQUEST, "E007", "로그인을 진행한 사용자가 아닙니다");
+	DUPLICATE_NICKNAME_EXCEPTION(HttpStatus.CONFLICT, "E006", "이미 사용되고 있는 닉네임 입니다"),
+	NOT_LOGINED_EXCEPTION(HttpStatus.BAD_REQUEST, "E007", "로그인을 진행한 사용자가 아닙니다"),
+	UN_VERIFICATION_EXCEPTION(HttpStatus.UNAUTHORIZED, "E008", "아직 이메일 인증을 진행하지 않았습니다");
 
 	private final HttpStatus httpStatus;
 	private final String code;

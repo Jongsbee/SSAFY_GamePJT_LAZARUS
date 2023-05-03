@@ -122,6 +122,9 @@ public class UserServiceImpl implements UserService{
 
 		User findUser = findByUserEmail.get().getUser();
 
+		if(!findUser.isUserActive())
+			throw new CustomException(CustomExceptionType.UN_VERIFICATION_EXCEPTION);
+
 		boolean isCanLogin = bcryptUtil.checkPassword(request.getPassword(), findUser.getPassword());
 
 		if(!isCanLogin)

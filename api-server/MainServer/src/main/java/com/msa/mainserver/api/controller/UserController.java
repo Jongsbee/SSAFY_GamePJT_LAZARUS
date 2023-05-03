@@ -3,19 +3,11 @@ package com.msa.mainserver.api.controller;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import com.msa.mainserver.dto.request.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.msa.mainserver.api.service.UserService;
 import com.msa.mainserver.db.entity.User;
-import com.msa.mainserver.dto.request.CheckDuplicateRequest;
-import com.msa.mainserver.dto.request.LoginRequest;
-import com.msa.mainserver.dto.request.RegisterRequest;
-import com.msa.mainserver.dto.request.WithdrawalUserRequest;
 import com.msa.mainserver.dto.response.LoginResponse;
 import com.msa.mainserver.util.BcryptUtil;
 
@@ -81,6 +73,26 @@ public class UserController {
 		userService.withdrawalUser(request);
 		return ResponseEntity.ok("회원탈퇴가 정상적으로 완료되었습니다");
 	}
+
+	/**
+	 * EMAIL 인증을 위한 메소드
+	 * @param email => EMAIl을 파라미터로 받는다
+	 * @return => EMAIL 전송을 성공적으로 완료 시 return HttpsStatus 200
+	 */
+	@GetMapping("/verify/{email}")
+	@Operation(summary = "메일인증 요청", description = "메일인증 요청 메서드.")
+	public ResponseEntity sendVerifyEmail(@PathVariable String email){
+		userService.sendVerificationMail(email);
+		return ResponseEntity.ok("인증 메일 발송 완료");
+	}
+
+	@GetMapping("/verify/request/{uuid}")
+	public String getVerifyEmailCode(@PathVariable String uuid){
+		String verifyEmail = userService.getVerifyEmail(uuid);
+		return verifyEmail;
+	}
+
+
 
 
 

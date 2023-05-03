@@ -2,10 +2,17 @@ package com.msa.mainserver.api.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.msa.mainserver.dto.request.*;
+import com.msa.mainserver.util.EmailUtil;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +25,6 @@ import com.msa.mainserver.db.repository.UserActivityRepository;
 import com.msa.mainserver.db.repository.UserAmountRepository;
 import com.msa.mainserver.db.repository.UserRepository;
 import com.msa.mainserver.dto.enums.CheckDuplicateType;
-import com.msa.mainserver.dto.request.CheckDuplicateRequest;
-import com.msa.mainserver.dto.request.LoginRequest;
-import com.msa.mainserver.dto.request.RegisterRequest;
-import com.msa.mainserver.dto.request.WithdrawalUserRequest;
 import com.msa.mainserver.dto.response.LoginResponse;
 import com.msa.mainserver.util.BcryptUtil;
 
@@ -38,6 +41,13 @@ public class UserServiceImpl implements UserService{
 	private final UserActivityRepository userActivityRepository;
 	private final UserAmountRepository userAmountRepository;
 	private final BcryptUtil bcryptUtil;
+	private final EmailUtil emailUtil;
+	private final RedisTemplate<String, String> redisTemplate;
+	private final char[] specialChars = {'!', '@', '$', '%', '(', ')'};
+
+	@Value("${spring.mail.verify-link}")
+	private String verifyLink;
+
 	@Override
 	@Transactional
 	public void userRegister(RegisterRequest registerRequest) {
@@ -53,6 +63,29 @@ public class UserServiceImpl implements UserService{
 			.build();
 
 		User saveUser = userRepository.save(user);
+
+		UserActivity userActivity = UserActivity.builder()
+				.user(saveUser)
+				.recentLoginTime(null)
+				.recentLoginIp(null)
+				.shortestEscapeTime(null)
+				.longestSurvivalTime(null)
+				.monsterKills(0)
+				.deathCount(0)
+				.totalQuestCompleted(0)
+				.totalItemCrafted(0)
+				.totalEscapeCount(0)
+				.totalPlayTime(0)
+				.build();
+
+		userActivityRepository.save(userActivity);
+
+		UserAmount userAmount = UserAmount.builder()
+				.user(saveUser)
+				.userAmount(0)
+				.build();
+		userAmountRepository.save(userAmount);
+
 	}
 
 	@Override
@@ -78,61 +111,29 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public LoginResponse userLogin(LoginRequest request, HttpServletRequest httpRequest) {
-		Optional<User> findByEmail = userRepository.findByEmail(request.getEmail());
-		log.info(findByEmail.get().getId()+" ");
-
-		if(!findByEmail.isPresent())
-			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
 		Optional<UserActivity> findByUserEmail = userActivityRepository.findByUser_Email(request.getEmail());
 
-		if(!findByUserEmail.isPresent()){
-			UserActivity userActivity = UserActivity.builder()
-				.id(findByEmail.get().getId())
-				.user(findByEmail.get())
-				.recentLoginTime(LocalDateTime.now())
-				.recentLoginIp(getClientIp(httpRequest))
-				.shortestEscapeTime(null)
-				.longestSurvivalTime(null)
-				.monsterKills(0)
-				.deathCount(0)
-				.totalQuestCompleted(0)
-				.totalItemCrafted(0)
-				.totalEscapeCount(0)
-				.totalPlayTime(0)
-				.build();
+		if(!findByUserEmail.isPresent())
+			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
-			userActivityRepository.save(userActivity);
-		}else{
-			findByUserEmail.get().setRecentLoginIp(getClientIp(httpRequest));
-			findByUserEmail.get().setRecentLoginTime(LocalDateTime.now());
-		}
+		findByUserEmail.get().setRecentLoginIp(getClientIp(httpRequest));
+		findByUserEmail.get().setRecentLoginTime(LocalDateTime.now());
 
-		log.info("여기서 멈추냐");
+		User findUser = findByUserEmail.get().getUser();
 
-		boolean isCanLogin = bcryptUtil.checkPassword(request.getPassword(), findByEmail.get().getPassword());
+		boolean isCanLogin = bcryptUtil.checkPassword(request.getPassword(), findUser.getPassword());
 
 		if(!isCanLogin)
 			throw new CustomException(CustomExceptionType.WRONG_PASSWORD_EXCEPTION);
 
-		Optional<UserAmount> findUserAmount = userAmountRepository.findById(findByEmail.get().getId());
+		Optional<UserAmount> findUserAmount = userAmountRepository.findById(findUser.getId());
 
 		LoginResponse response = LoginResponse.builder()
-			.id(findByEmail.get().getId())
-			.nickname(findByEmail.get().getNickname())
+			.id(findUser.getId())
+			.nickname(findUser.getNickname())
+			.amount(findUserAmount.get().getUserAmount())
 			.build();
-
-		if(!findUserAmount.isPresent()){
-			UserAmount userAmount = UserAmount.builder()
-				.id(findByEmail.get().getId())
-				.userAmount(0)
-				.user(findByEmail.get())
-				.build();
-			userAmountRepository.save(userAmount);
-			response.setAmount(0);
-		}else{
-			response.setAmount(findUserAmount.get().getUserAmount());
-		}
 
 		return response;
 	}
@@ -146,6 +147,43 @@ public class UserServiceImpl implements UserService{
 			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
 		findById.get().withdrawalUser();
+	}
+
+	@Override
+	public void sendVerificationMail(String email) {
+		UUID uuid = UUID.randomUUID();
+		String key = uuid.toString();
+		String content = "";
+		content += "<div style='margin:20px;'>";
+		content += "<h1> 안녕하세요 MSA 입니다. </h1>";
+		content += "<br>";
+		content += "<p>인증하시려면 아래 링크를 클릭해주세요</p>";
+		content += "<br>";
+		content += "<p>감사합니다.</p>";
+		content += "<br>";
+		content += "<div align='center' style='border:1px solid black; font-family:verdana';>";
+		content += "<h3 style='color:blue;'>회원가입 인증 링크입니다.</h3>";
+		content += "<div style='font-size:130%'>";
+		content += "인증하려면 클릭하세요 : <a href =" + verifyLink + key;
+		content += " style='color:red;'>인증 링크</a><div><br/> ";
+		content += "</div>";
+		emailUtil.sendEmail(email, "[MSA] 회원가입 인증메일입니다.", content);
+		redisTemplate.opsForValue().set(key, email, 10, TimeUnit.MINUTES);
+	}
+
+	@Override
+	@Transactional
+	public String getVerifyEmail(String uuid) {
+		log.info(""+uuid);
+		String key = uuid;
+		String email = redisTemplate.opsForValue().get(key);
+		if(email == null){
+			return "<script>alert('인증 기간이 만료되었습니다') window.close();</script>";
+		}else{
+			Optional<User> findByEmail = userRepository.findByEmail(email);
+			findByEmail.get().setUserActive(true);
+			return "<script>alert('메일 인증이 완료되었습니다'); window.close();</script>";
+		}
 	}
 
 	/**
@@ -164,4 +202,5 @@ public class UserServiceImpl implements UserService{
 			return realIp == null ? forwarded.split(",")[0] : realIp;
 		}
 	}
+
 }

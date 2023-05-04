@@ -88,7 +88,7 @@ pipeline {
                         }
 
                         withCredentials([usernamePassword(credentialsId: 'gitlab-account', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                            sh 'git remote set-url origin https://$GIT_USERNAME:$GIT_PASSWORD@https://lab.ssafy.com/dope2514/s08p31a106-gitops.git'
+                            sh 'git remote set-url origin https://$GIT_USERNAME:$GIT_PASSWORD@lab.ssafy.com/dope2514/s08p31a106-gitops.git'
                             sh 'git push origin main'
                         }
                     }

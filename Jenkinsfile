@@ -81,9 +81,9 @@ pipeline {
                         if(env.BRANCH_NAME == 'api-server/member') {
                             echo "Auth Server Deploy Step"
                             sh """
-                                sed -i 's/constelink-authserver:\\([^:]*\\)/constelink-authserver:${env.BUILD_NUMBER}/g' manifests/constelink-authserver.yaml
-                                git add manifests/constelink-authserver.yaml
-                                git commit -m 'Update constelink-authserver tag to ${env.BUILD_NUMBER}'
+                                sed -i 's/msa-mainserver:\\([^:]*\\)/msa-mainserver:${env.BUILD_NUMBER}/g' servers/msa-mainserver.yaml
+                                git add servers/msa-mainserver.yaml
+                                git commit -m 'Update msa-mainserver tag to ${env.BUILD_NUMBER}'
                             """
                         }
 

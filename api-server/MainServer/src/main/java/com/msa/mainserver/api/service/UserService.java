@@ -15,4 +15,5 @@ public interface UserService {
 	public void withdrawalUser(WithdrawalUserRequest request);
 	public void sendVerificationMail(String email);
 	public String getVerifyEmail(String email);
+	public int changeUserAmount(AmountChangeRequest request);
 }

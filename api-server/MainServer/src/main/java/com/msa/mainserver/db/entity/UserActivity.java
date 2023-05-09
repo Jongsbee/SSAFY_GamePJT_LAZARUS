@@ -46,8 +46,11 @@ public class UserActivity {
 	@Column(name = "longest_survival_time")
 	private Long longestSurvivalTime;
 
-	@Column(name = "monster_kills")
-	private int monsterKills;
+	@Column(name = "normal_monster_kills")
+	private int normalMonsterKills;
+
+	@Column(name = "elite_monster_kills")
+	private int eliteMonsterKills;
 
 	@Column(name = "death_count")
 	private int deathCount;

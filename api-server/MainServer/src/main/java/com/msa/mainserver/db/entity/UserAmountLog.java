@@ -33,7 +33,7 @@ public class UserAmountLog {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
-	private UserAmount user;
+	private User user;
 
 	@Column(name = "amount_change", nullable = false)
 	private int amountChange;

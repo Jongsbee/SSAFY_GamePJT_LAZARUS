@@ -91,11 +91,20 @@ public class UserController {
 		String verifyEmail = userService.getVerifyEmail(uuid);
 		return verifyEmail;
 	}
+	
+	@PostMapping("/change/amount")
+	@Operation(summary = "유저 재화 변동 요청", description = "유저 재화 변동 요청 요청 메서드 " 
+		+ "userId : User의 PK 입력"
+		+ "amount : 변동된 재화의 양을 입력")
+	public ResponseEntity changeUserAmount(@RequestBody AmountChangeRequest request){
+		int changeAmount = userService.changeUserAmount(request);
 
+		if(changeAmount > 0){
+			return ResponseEntity.ok(changeAmount + "만큼 추가 되셨습니다");
+		}else{
+			return ResponseEntity.ok(changeAmount + "만큼 소비 하셨습니다");
+		}
 
-
-
-
-
+	}
 
 }

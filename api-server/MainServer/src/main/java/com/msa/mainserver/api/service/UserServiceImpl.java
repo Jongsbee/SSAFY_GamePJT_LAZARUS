@@ -2,15 +2,15 @@ package com.msa.mainserver.api.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.msa.mainserver.db.entity.UserAmountLog;
+import com.msa.mainserver.db.repository.UserAmountLogRepository;
 import com.msa.mainserver.dto.request.*;
 import com.msa.mainserver.util.EmailUtil;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -40,10 +40,10 @@ public class UserServiceImpl implements UserService{
 	private final UserRepository userRepository;
 	private final UserActivityRepository userActivityRepository;
 	private final UserAmountRepository userAmountRepository;
+	private final UserAmountLogRepository userAmountLogRepository;
 	private final BcryptUtil bcryptUtil;
 	private final EmailUtil emailUtil;
 	private final RedisTemplate<String, String> redisTemplate;
-	private final char[] specialChars = {'!', '@', '$', '%', '(', ')'};
 
 	@Value("${spring.mail.verify-link}")
 	private String verifyLink;
@@ -70,7 +70,8 @@ public class UserServiceImpl implements UserService{
 				.recentLoginIp(null)
 				.shortestEscapeTime(null)
 				.longestSurvivalTime(null)
-				.monsterKills(0)
+				.normalMonsterKills(0)
+				.eliteMonsterKills(0)
 				.deathCount(0)
 				.totalQuestCompleted(0)
 				.totalItemCrafted(0)
@@ -117,9 +118,6 @@ public class UserServiceImpl implements UserService{
 		if(!findByUserEmail.isPresent())
 			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
-		findByUserEmail.get().setRecentLoginIp(getClientIp(httpRequest));
-		findByUserEmail.get().setRecentLoginTime(LocalDateTime.now());
-
 		User findUser = findByUserEmail.get().getUser();
 
 		if(!findUser.isUserActive())
@@ -129,6 +127,9 @@ public class UserServiceImpl implements UserService{
 
 		if(!isCanLogin)
 			throw new CustomException(CustomExceptionType.WRONG_PASSWORD_EXCEPTION);
+
+		findByUserEmail.get().setRecentLoginIp(getClientIp(httpRequest));
+		findByUserEmail.get().setRecentLoginTime(LocalDateTime.now());
 
 		Optional<UserAmount> findUserAmount = userAmountRepository.findById(findUser.getId());
 
@@ -187,6 +188,27 @@ public class UserServiceImpl implements UserService{
 			findByEmail.get().setUserActive(true);
 			return "<script>alert('메일 인증이 완료되었습니다'); window.close();</script>";
 		}
+	}
+
+	@Override
+	@Transactional
+	public int changeUserAmount(AmountChangeRequest request) {
+
+		Optional<UserAmount> findUserAmount = userAmountRepository.findById(request.getUserId());
+		if(!findUserAmount.isPresent())
+			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
+
+		findUserAmount.get().setUserAmount(findUserAmount.get().getUserAmount() + request.getAmount());
+
+		UserAmountLog userAmountLog = UserAmountLog.builder()
+			.amountChange(request.getAmount())
+			.user(findUserAmount.get().getUser())
+			.totalAmount(findUserAmount.get().getUserAmount() + request.getAmount())
+			.build();
+
+		userAmountLogRepository.save(userAmountLog);
+
+		return request.getAmount();
 	}
 
 	/**

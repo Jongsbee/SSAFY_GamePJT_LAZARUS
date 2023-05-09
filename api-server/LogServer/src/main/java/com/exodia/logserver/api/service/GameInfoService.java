@@ -1,8 +1,8 @@
 package com.exodia.logserver.api.service;
 
-import com.exodia.logserver.dto.Request.CreateRoomRequest;
-import com.exodia.logserver.dto.response.CreateRoomResponse;
+import com.exodia.logserver.dto.request.StartRoomRequest;
 
 public interface GameInfoService {
-	public CreateRoomResponse createRoom(CreateRoomRequest request);
+
+	public void startGame(StartRoomRequest request);
 }

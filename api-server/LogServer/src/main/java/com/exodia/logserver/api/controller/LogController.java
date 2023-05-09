@@ -10,6 +10,7 @@ import com.exodia.logserver.api.service.LogService;
 import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
+import com.exodia.logserver.dto.request.QuestLogRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,6 +54,16 @@ public class LogController {
 	@PostMapping("/clear")
 	public ResponseEntity saveClearLog(@RequestBody ClearLogRequest request){
 		logService.saveClearLog(request);
+		return ResponseEntity.ok("저장 완료");
+	}
+
+	@Operation(summary = "퀘스트 완료 로그 저장", description = "퀘스트 완료 로그 저장 메소드,  "
+		+ "gameId : 방의 고유한 UUID 를 넣어주면 됩니다"
+		+ "userId : 퀘스트를 완료한 유저의 번호를 넣어주면 됩니다"
+		+ "questId : 클리어한 퀘스트의 고유 id를 넣어주면 됩니다")
+	@PostMapping("/quest")
+	public ResponseEntity saveQuestLog(@RequestBody QuestLogRequest request){
+		logService.saveQuestLog(request);
 		return ResponseEntity.ok("저장 완료");
 	}
 

@@ -13,13 +13,16 @@ import com.exodia.logserver.db.entity.GameInfo;
 import com.exodia.logserver.db.entity.InGameClearLog;
 import com.exodia.logserver.db.entity.InGameCraftLog;
 import com.exodia.logserver.db.entity.InGameHuntLog;
+import com.exodia.logserver.db.entity.InGameQuestLog;
 import com.exodia.logserver.db.repository.GameInfoRepository;
 import com.exodia.logserver.db.repository.InGameClearLogRepository;
 import com.exodia.logserver.db.repository.InGameCraftLogRepository;
 import com.exodia.logserver.db.repository.InGameHuntLogRepository;
+import com.exodia.logserver.db.repository.InGameQuestLogRepository;
 import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
+import com.exodia.logserver.dto.request.QuestLogRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +37,7 @@ public class LogServiceImpl implements LogService{
 	private final InGameCraftLogRepository inGameCraftLogRepository;
 	private final InGameHuntLogRepository inGameHuntLogRepository;
 	private final GameInfoRepository gameInfoRepository;
+	private final InGameQuestLogRepository inGameQuestLogRepository;
 
 	@Override
 	public void saveCraftLog(CraftLogRequest request) {
@@ -91,5 +95,17 @@ public class LogServiceImpl implements LogService{
 		}
 
 		inGameClearLogRepository.save(inGameClearLog);
+	}
+
+	@Override
+	public void saveQuestLog(QuestLogRequest request) {
+		InGameQuestLog inGameQuestLog = new InGameQuestLog().builder()
+			.questId(request.getQuestId())
+			.userId(request.getUserId())
+			.gameId(request.getGameId())
+			.clearTime(LocalDateTime.now())
+			.build();
+
+		inGameQuestLogRepository.save(inGameQuestLog);
 	}
 }

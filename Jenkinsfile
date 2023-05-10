@@ -11,6 +11,18 @@ pipeline {
                             sh 'chmod +x gradlew'
                             sh './gradlew clean build -x test'
                         }
+                    } else if(env.BRANCH_NAME == 'api-server/logserver') {
+                        echo "Auth Server Project Build Step"
+                        dir('api-server/LogServer') {
+                            sh 'chmod +x gradlew'
+                            sh './gradlew clean build -x test'
+                        }
+                    } else if(env.BRANCH_NAME == 'scheduler-server/schedulerServer') {
+                        echo "Auth Server Project Build Step"
+                        dir('scheduler-server/SchedulerServer') {
+                            sh 'chmod +x gradlew'
+                            sh './gradlew clean build -x test'
+                        }
                     }
                 }
             }
@@ -61,6 +73,16 @@ pipeline {
                                     sh """#!/busybox/sh
                                     /kaniko/executor --context=/workspace/api-server/MainServer --dockerfile=/workspace/api-server/MainServer/Dockerfile --destination=sadoruin/msa-mainserver:${env.BUILD_NUMBER}
                                     """
+                                } else if(env.BRANCH_NAME == 'api-server/logserver') {
+                                    echo "Auth Server Image Build Step"
+                                    sh """#!/busybox/sh
+                                    /kaniko/executor --context=/workspace/api-server/LogServer --dockerfile=/workspace/api-server/LogServer/Dockerfile --destination=sadoruin/msa-logserver:${env.BUILD_NUMBER}
+                                    """
+                                } else if(env.BRANCH_NAME == 'scheduler-server/schedulerServer') {
+                                    echo "Auth Server Image Build Step"
+                                    sh """#!/busybox/sh
+                                    /kaniko/executor --context=/workspace/scheduler-server/SchedulerServer --dockerfile=/workspace/scheduler-server/SchedulerServer/Dockerfile --destination=sadoruin/msa-schedulerserver:${env.BUILD_NUMBER}
+                                    """
                                 }
                             }
                         }
@@ -84,6 +106,20 @@ pipeline {
                                 sed -i 's/msa-mainserver:\\([^:]*\\)/msa-mainserver:${env.BUILD_NUMBER}/g' servers/msa-mainserver.yaml
                                 git add servers/msa-mainserver.yaml
                                 git commit -m 'Update msa-mainserver tag to ${env.BUILD_NUMBER}'
+                            """
+                        } else if(env.BRANCH_NAME == 'api-server/logserver') {
+                            echo "Auth Server Deploy Step"
+                            sh """
+                                sed -i 's/msa-logserver:\\([^:]*\\)/msa-logserver:${env.BUILD_NUMBER}/g' servers/msa-logserver.yaml
+                                git add servers/msa-logserver.yaml
+                                git commit -m 'Update msa-logserver tag to ${env.BUILD_NUMBER}'
+                            """
+                        } else if(env.BRANCH_NAME == 'scheduler-server/schedulerServer') {
+                            echo "Auth Server Deploy Step"
+                            sh """
+                                sed -i 's/msa-schedulerServer:\\([^:]*\\)/msa-schedulerServer:${env.BUILD_NUMBER}/g' servers/msa-schedulerServer.yaml
+                                git add servers/msa-schedulerServer.yaml
+                                git commit -m 'Update msa-schedulerServer tag to ${env.BUILD_NUMBER}'
                             """
                         }
 

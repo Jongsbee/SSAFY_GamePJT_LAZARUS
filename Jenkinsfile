@@ -117,9 +117,9 @@ pipeline {
                         } else if(env.BRANCH_NAME == 'scheduler-server/schedulerServer') {
                             echo "Auth Server Deploy Step"
                             sh """
-                                sed -i 's/msa-schedulerServer:\\([^:]*\\)/msa-schedulerServer:${env.BUILD_NUMBER}/g' servers/msa-schedulerServer.yaml
-                                git add servers/msa-schedulerServer.yaml
-                                git commit -m 'Update msa-schedulerServer tag to ${env.BUILD_NUMBER}'
+                                sed -i 's/msa-schedulerserver:\\([^:]*\\)/msa-schedulerserver:${env.BUILD_NUMBER}/g' servers/msa-schedulerserver.yaml
+                                git add servers/msa-schedulerserver.yaml
+                                git commit -m 'Update msa-schedulerserver tag to ${env.BUILD_NUMBER}'
                             """
                         }
 

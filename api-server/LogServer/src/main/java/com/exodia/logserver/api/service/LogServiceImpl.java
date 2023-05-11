@@ -21,6 +21,7 @@ import com.exodia.logserver.db.repository.InGameCraftLogRepository;
 import com.exodia.logserver.db.repository.InGameHuntLogRepository;
 import com.exodia.logserver.db.repository.InGameQuestLogRepository;
 import com.exodia.logserver.db.repository.InGameUseLogRepository;
+import com.exodia.logserver.dto.enums.GameStatus;
 import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
@@ -101,6 +102,7 @@ public class LogServiceImpl implements LogService{
 				.build();
 
 			gameInfo.get().setEndTime(LocalDateTime.now());
+			gameInfo.get().setGameStatus(GameStatus.NORMAL_END);
 			gameInfoRepository.save(gameInfo.get());
 		}else{
 			inGameClearLog = InGameClearLog.builder()

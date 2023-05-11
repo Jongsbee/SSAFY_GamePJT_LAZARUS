@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClearLogRequest {
+public class UseLogRequest {
 	private Long userId;
+	private Long itemId;
 	private String gameId;
-	private boolean cleared;
 }

@@ -14,15 +14,18 @@ import com.exodia.logserver.db.entity.InGameClearLog;
 import com.exodia.logserver.db.entity.InGameCraftLog;
 import com.exodia.logserver.db.entity.InGameHuntLog;
 import com.exodia.logserver.db.entity.InGameQuestLog;
+import com.exodia.logserver.db.entity.InGameUseLog;
 import com.exodia.logserver.db.repository.GameInfoRepository;
 import com.exodia.logserver.db.repository.InGameClearLogRepository;
 import com.exodia.logserver.db.repository.InGameCraftLogRepository;
 import com.exodia.logserver.db.repository.InGameHuntLogRepository;
 import com.exodia.logserver.db.repository.InGameQuestLogRepository;
+import com.exodia.logserver.db.repository.InGameUseLogRepository;
 import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
 import com.exodia.logserver.dto.request.QuestLogRequest;
+import com.exodia.logserver.dto.request.UseLogRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +41,7 @@ public class LogServiceImpl implements LogService{
 	private final InGameHuntLogRepository inGameHuntLogRepository;
 	private final GameInfoRepository gameInfoRepository;
 	private final InGameQuestLogRepository inGameQuestLogRepository;
+	private final InGameUseLogRepository inGameUseLogRepository;
 
 	@Override
 	public void saveCraftLog(CraftLogRequest request) {
@@ -49,6 +53,18 @@ public class LogServiceImpl implements LogService{
 			.build();
 
 		inGameCraftLogRepository.save(inGameCraftLog);
+	}
+
+	@Override
+	public void saveUseLog(UseLogRequest useLogRequest) {
+		InGameUseLog inGameUseLog = InGameUseLog.builder()
+			.gameId(useLogRequest.getGameId())
+			.userId(useLogRequest.getUserId())
+			.itemId(useLogRequest.getItemId())
+			.useTime(LocalDateTime.now())
+			.build();
+
+		inGameUseLogRepository.save(inGameUseLog);
 	}
 
 	@Override
@@ -67,6 +83,7 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public void saveClearLog(ClearLogRequest request) {
 		InGameClearLog inGameClearLog = null;
+		//log.info("cleared? = " + request.isCleared());
 		if(request.isCleared()){
 			Optional<GameInfo> gameInfo = gameInfoRepository.findById(request.getGameId());
 			if(!gameInfo.isPresent())
@@ -78,17 +95,18 @@ public class LogServiceImpl implements LogService{
 			inGameClearLog = InGameClearLog.builder()
 				.gameId(request.getGameId())
 				.userId(request.getUserId())
-				.isCleared(request.isCleared())
+				.cleared(request.isCleared())
 				.endTime(LocalDateTime.now())
 				.spentTime(spentTime)
 				.build();
 
 			gameInfo.get().setEndTime(LocalDateTime.now());
+			gameInfoRepository.save(gameInfo.get());
 		}else{
 			inGameClearLog = InGameClearLog.builder()
 				.gameId(request.getGameId())
 				.userId(request.getUserId())
-				.isCleared(request.isCleared())
+				.cleared(request.isCleared())
 				.endTime(null)
 				.spentTime(null)
 				.build();
@@ -108,4 +126,6 @@ public class LogServiceImpl implements LogService{
 
 		inGameQuestLogRepository.save(inGameQuestLog);
 	}
+
+
 }

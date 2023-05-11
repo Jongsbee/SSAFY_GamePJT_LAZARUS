@@ -1,5 +1,6 @@
 package com.exodia.logserver.db.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collation = "in_game_clear_log")
+@Document(collection = "in_game_clear_log")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,10 +24,10 @@ import lombok.Setter;
 public class InGameClearLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private BigInteger id;
 	private Long userId;
 	private String gameId;
-	private boolean isCleared;
+	private boolean cleared;
 	private LocalDateTime endTime;
 	private Long spentTime;
 

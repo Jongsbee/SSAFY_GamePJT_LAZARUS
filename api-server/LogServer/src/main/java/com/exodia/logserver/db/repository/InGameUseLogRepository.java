@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.exodia.logserver.db.entity.InGameHuntLog;
+import com.exodia.logserver.db.entity.InGameUseLog;
 
-public interface InGameHuntLogRepository extends MongoRepository<InGameHuntLog, BigInteger> {
+public interface InGameUseLogRepository extends MongoRepository<InGameUseLog, BigInteger> {
 }

@@ -11,6 +11,7 @@ import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
 import com.exodia.logserver.dto.request.QuestLogRequest;
+import com.exodia.logserver.dto.request.UseLogRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,6 +37,16 @@ public class LogController {
 		return ResponseEntity.ok("저장 완료");
 	}
 
+	@Operation(summary = "아이템 소비 로그 저장", description = "어아탬 소비 로그 저장 메소드,  "
+		+ "gameId : 방의 고유한 UUID 를 넣어주면 됩니다"
+		+ "userId : 아이템을 제작한 유저의 번호를 넣어주면 됩니다"
+		+ "itemId : 소비한  아이템의 번호를 넣어주면 됩니다.")
+	@PostMapping("/use")
+	public ResponseEntity saveUseLog(@RequestBody UseLogRequest useLogRequest){
+		logService.saveUseLog(useLogRequest);
+		return ResponseEntity.ok("저장 완료");
+	}
+
 	@Operation(summary = "몬스터 사냥 로그 저장", description = "몬스터 사냥 로그 저장 메소드,  "
 		+ "gameId : 방의 고유한 UUID 를 넣어주면 됩니다"
 		+ "userId : 몬스터를 사냥한 유저의 번호를 넣어주면 됩니다"
@@ -47,10 +58,10 @@ public class LogController {
 		return ResponseEntity.ok("저장 완료");
 	}
 
-	@Operation(summary = "아이템 제작 로그 저장", description = "어아탬 제작 로그 저장 메소드,  "
+	@Operation(summary = "게임 클리어 로그 저장", description = "게임 클리어 로그 저장 메소드,  "
 		+ "gameId : 방의 고유한 UUID 를 넣어주면 됩니다"
 		+ "userId : 게임을 클리어한 유저의 번호를 넣어주면 됩니다"
-		+ "isCleared : 게임 클리어 여부를 넣어주면 됩니다 ( true : 클리어 , false : 사망 )	")
+		+ "cleared : 게임 클리어 여부를 넣어주면 됩니다 ( true : 클리어 , false : 사망 )	")
 	@PostMapping("/clear")
 	public ResponseEntity saveClearLog(@RequestBody ClearLogRequest request){
 		logService.saveClearLog(request);

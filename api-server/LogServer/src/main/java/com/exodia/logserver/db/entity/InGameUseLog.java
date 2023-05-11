@@ -15,18 +15,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "in_game_quest_log")
+@Document(collection = "in_game_use_log")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InGameQuestLog {
+public class InGameUseLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private BigInteger id;
 	private Long userId;
-	private Long questId;
+	private Long itemId;
 	private String gameId;
-	private LocalDateTime clearTime;
+	private LocalDateTime useTime;
+
 }

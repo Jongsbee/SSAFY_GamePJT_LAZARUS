@@ -4,6 +4,7 @@ import com.exodia.logserver.dto.request.ClearLogRequest;
 import com.exodia.logserver.dto.request.CraftLogRequest;
 import com.exodia.logserver.dto.request.HuntLogRequest;
 import com.exodia.logserver.dto.request.QuestLogRequest;
+import com.exodia.logserver.dto.request.UseLogRequest;
 
 public interface LogService {
 
@@ -11,4 +12,5 @@ public interface LogService {
 	public void saveHuntLog(HuntLogRequest request);
 	public void saveClearLog(ClearLogRequest request);
 	public void saveQuestLog(QuestLogRequest request);
+	public void saveUseLog(UseLogRequest useLogRequest);
 }

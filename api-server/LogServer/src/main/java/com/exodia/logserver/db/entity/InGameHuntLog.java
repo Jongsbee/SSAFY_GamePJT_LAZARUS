@@ -1,5 +1,6 @@
 package com.exodia.logserver.db.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import javax.persistence.EnumType;
@@ -18,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collation = "in_game_hunt_log")
+@Document(collection = "in_game_hunt_log")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,7 +28,7 @@ import lombok.Setter;
 public class InGameHuntLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private BigInteger id;
 	private Long userId;
 	private Long creatureId;
 	@Enumerated(EnumType.STRING)

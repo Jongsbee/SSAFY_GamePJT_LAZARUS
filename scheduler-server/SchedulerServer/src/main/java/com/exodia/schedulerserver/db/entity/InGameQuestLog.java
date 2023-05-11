@@ -1,5 +1,6 @@
 package com.exodia.schedulerserver.db.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collation = "in_game_quest_log")
+@Document(collection = "in_game_quest_log")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +24,7 @@ import lombok.Setter;
 public class InGameQuestLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private BigInteger id;
 	private Long userId;
 	private Long questId;
 	private String gameId;

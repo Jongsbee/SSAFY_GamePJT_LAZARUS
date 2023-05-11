@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.exodia.schedulerserver.db.entity.GameInfo;
 import com.exodia.schedulerserver.db.entity.InGameClearLog;
@@ -25,18 +25,18 @@ import com.exodia.schedulerserver.db.repository.InGameQuestLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameUseLogRepository;
 import com.exodia.schedulerserver.db.repository.ItemStatisticRepository;
 import com.exodia.schedulerserver.db.repository.UserActivityRepository;
-import com.exodia.schedulerserver.db.repository.UserAmountLogRepository;
-import com.exodia.schedulerserver.db.repository.UserAmountRepository;
 import com.exodia.schedulerserver.db.repository.UserRecordRepository;
 import com.exodia.schedulerserver.db.repository.UserRepository;
 import com.exodia.schedulerserver.dto.enums.CreatureType;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@Component
+@RestController
 @RequiredArgsConstructor
 @Transactional
-public class  LogScheduler {
+@Slf4j
+public class TestController {
 
 	private final GameInfoRepository gameInfoRepository;
 	private final InGameClearLogRepository inGameClearLogRepository;
@@ -48,15 +48,16 @@ public class  LogScheduler {
 	private final InGameQuestLogRepository inGameQuestLogRepository;
 	private final InGameUseLogRepository inGameUseLogRepository;
 	private final ItemStatisticRepository itemStatisticRepository;
-
-	@Scheduled(cron = "0 0 0 * * ?")
-	public void InsertDataByLog(){
-
-		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+	@GetMapping("test")
+	public void test(){
+		LocalDateTime yesterday = LocalDateTime.now();
 		LocalDateTime start = yesterday.toLocalDate().atStartOfDay();
 		LocalDateTime end = start.plusDays(1);
-
+		log.info(start+"");
+		log.info(end+"");
 		List<GameInfo> findGames = gameInfoRepository.findByEndTimeBetween(start, end);
+
+		log.info("있어??" + findGames.size());
 
 		if(findGames.size() == 0)
 			return;
@@ -73,7 +74,7 @@ public class  LogScheduler {
 					findUser.get().getId(), gi.getId());
 
 				int eliteCnt = 0;  // 엘리트몹
- 				int normalCnt = 0; // 일반 몹
+				int normalCnt = 0; // 일반 몹
 				for(InGameHuntLog log : huntLogs){
 					if(log.getCreatureType() == CreatureType.ELITE){
 						eliteCnt++;
@@ -104,6 +105,7 @@ public class  LogScheduler {
 
 				Optional<UserActivity> userActivity = userActivityRepository.findById(i);
 
+				log.info("spentTime " + clearLog.getSpentTime());
 				//유저 활동 테이블 갱신
 				userActivity.get().changeEscapeAndDeathCnt(clearLog.isCleared());
 				userActivity.get().checkTimeToChange(clearLog.getSpentTime());
@@ -115,6 +117,9 @@ public class  LogScheduler {
 
 			List<InGameCraftLog> craftLogs = inGameCraftLogRepository.findInGameCraftLogsByGameId(
 				gi.getId());
+			for(InGameCraftLog cl : craftLogs){
+				log.info(cl.getItemId()+"");
+			}
 
 			for(InGameCraftLog cl : craftLogs){
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(cl.getItemId());

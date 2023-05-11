@@ -76,11 +76,17 @@ public class UserActivity {
 	}
 
 	public void checkTimeToChange(Long spentTime){
-		if(spentTime < shortestEscapeTime)
-			this.shortestEscapeTime = spentTime;
 
-		if(spentTime > longestSurvivalTime)
+		if(shortestEscapeTime == null && longestSurvivalTime == null){
+			this.shortestEscapeTime = spentTime;
 			this.longestSurvivalTime = spentTime;
+		}else{
+			if(spentTime < shortestEscapeTime)
+				this.shortestEscapeTime = spentTime;
+
+			if(spentTime > longestSurvivalTime)
+				this.longestSurvivalTime = spentTime;
+		}
 
 		this.totalPlayTime+=spentTime;
 	}

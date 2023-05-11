@@ -3,15 +3,11 @@ package com.exodia.schedulerserver.db.entity;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.exodia.schedulerserver.dto.enums.CreatureType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,21 +15,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "in_game_hunt_log")
+@Document(collection = "in_game_use_log")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InGameHuntLog {
+public class InGameUseLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private BigInteger id;
 	private Long userId;
-	private Long creatureId;
-	@Enumerated(EnumType.STRING)
-	private CreatureType creatureType;
+	private Long itemId;
 	private String gameId;
-	private LocalDateTime huntTime;
+	private LocalDateTime useTime;
 
 }

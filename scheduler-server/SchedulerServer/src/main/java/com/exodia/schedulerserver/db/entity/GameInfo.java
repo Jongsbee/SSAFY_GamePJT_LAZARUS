@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collation = "game_info")
+@Document(collection = "game_info")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_record")
+@Table(name = "gameplay_record")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

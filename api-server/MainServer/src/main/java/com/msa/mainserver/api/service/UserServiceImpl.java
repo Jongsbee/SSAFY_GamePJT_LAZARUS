@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService{
 		UserAmountLog userAmountLog = UserAmountLog.builder()
 			.amountChange(request.getAmount())
 			.user(findUserAmount.get().getUser())
-			.totalAmount(findUserAmount.get().getUserAmount() + request.getAmount())
+			.totalAmount(findUserAmount.get().getUserAmount())
 			.build();
 
 		userAmountLogRepository.save(userAmountLog);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.exodia.logserver.api.service.GameInfoService;
 import com.exodia.logserver.dto.request.StartRoomRequest;
+import com.exodia.logserver.dto.response.SuccessResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +34,7 @@ public class GameInfoController {
 		+ "users : 방에 참가해있는 유저들의 번호를 List형태로 넘겨주시면 됩니다.")
 	public ResponseEntity startGame(@RequestBody StartRoomRequest request) {
 		gameInfoService.startGame(request);
-		return ResponseEntity.ok("게임 시작 성공");
+		return ResponseEntity.ok(new SuccessResponse("게임 실행 완료"));
 	}
 
 }

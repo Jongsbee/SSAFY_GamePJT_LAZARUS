@@ -8,5 +8,5 @@ import com.msa.mainserver.db.entity.UserActivity;
 
 public interface UserActivityRepository extends JpaRepository<UserActivity, Long> {
 
-	Optional<UserActivity> findByUser_Email(String email);
+	Optional<UserActivity> findByUserEmail(String email);
 }

@@ -7,10 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.msa.mainserver.db.entity.UserAmountLog;
-import com.msa.mainserver.db.repository.UserAmountLogRepository;
-import com.msa.mainserver.dto.request.*;
-import com.msa.mainserver.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -21,12 +17,20 @@ import com.msa.mainserver.common.exception.CustomExceptionType;
 import com.msa.mainserver.db.entity.User;
 import com.msa.mainserver.db.entity.UserActivity;
 import com.msa.mainserver.db.entity.UserAmount;
+import com.msa.mainserver.db.entity.UserAmountLog;
 import com.msa.mainserver.db.repository.UserActivityRepository;
+import com.msa.mainserver.db.repository.UserAmountLogRepository;
 import com.msa.mainserver.db.repository.UserAmountRepository;
 import com.msa.mainserver.db.repository.UserRepository;
 import com.msa.mainserver.dto.enums.CheckDuplicateType;
+import com.msa.mainserver.dto.request.AmountChangeRequest;
+import com.msa.mainserver.dto.request.CheckDuplicateRequest;
+import com.msa.mainserver.dto.request.LoginRequest;
+import com.msa.mainserver.dto.request.RegisterRequest;
+import com.msa.mainserver.dto.request.WithdrawalUserRequest;
 import com.msa.mainserver.dto.response.LoginResponse;
 import com.msa.mainserver.util.BcryptUtil;
+import com.msa.mainserver.util.EmailUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final UserActivityRepository userActivityRepository;
@@ -65,26 +69,26 @@ public class UserServiceImpl implements UserService{
 		User saveUser = userRepository.save(user);
 
 		UserActivity userActivity = UserActivity.builder()
-				.user(saveUser)
-				.recentLoginTime(null)
-				.recentLoginIp(null)
-				.shortestEscapeTime(null)
-				.longestSurvivalTime(null)
-				.normalMonsterKills(0)
-				.eliteMonsterKills(0)
-				.deathCount(0)
-				.totalQuestCompleted(0)
-				.totalItemCrafted(0)
-				.totalEscapeCount(0)
-				.totalPlayTime(0)
-				.build();
+			.user(saveUser)
+			.recentLoginTime(null)
+			.recentLoginIp(null)
+			.shortestEscapeTime(null)
+			.longestSurvivalTime(null)
+			.normalMonsterKills(0)
+			.eliteMonsterKills(0)
+			.deathCount(0)
+			.totalQuestCompleted(0)
+			.totalItemCrafted(0)
+			.totalEscapeCount(0)
+			.totalPlayTime(0)
+			.build();
 
 		userActivityRepository.save(userActivity);
 
 		UserAmount userAmount = UserAmount.builder()
-				.user(saveUser)
-				.userAmount(0)
-				.build();
+			.user(saveUser)
+			.userAmount(0)
+			.build();
 		userAmountRepository.save(userAmount);
 
 	}
@@ -94,15 +98,15 @@ public class UserServiceImpl implements UserService{
 
 		CheckDuplicateType type = request.getType();
 
-		switch(type){
+		switch (type) {
 			case EMAIL:
 				Optional<User> findByEmail = userRepository.findByEmail(request.getInfo());
-				if(findByEmail.isPresent())
+				if (findByEmail.isPresent())
 					throw new CustomException(CustomExceptionType.DUPLICATE_EMAIL_EXCEPTION);
 				break;
 			case NICKNAME:
 				Optional<User> findByNickname = userRepository.findByNickname(request.getInfo());
-				if(findByNickname.isPresent())
+				if (findByNickname.isPresent())
 					throw new CustomException(CustomExceptionType.DUPLICATE_NICKNAME_EXCEPTION);
 				break;
 		}
@@ -113,23 +117,23 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public LoginResponse userLogin(LoginRequest request, HttpServletRequest httpRequest) {
 
-		Optional<UserActivity> findByUserEmail = userActivityRepository.findByUser_Email(request.getEmail());
+		Optional<UserActivity> userActivity = userActivityRepository.findByUserEmail(request.getEmail());
 
-		if(!findByUserEmail.isPresent())
+		if (!userActivity.isPresent())
 			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
-		User findUser = findByUserEmail.get().getUser();
+		User findUser = userActivity.get().getUser();
 
-		if(!findUser.isUserActive())
+		if (!findUser.isUserActive())
 			throw new CustomException(CustomExceptionType.UN_VERIFICATION_EXCEPTION);
 
 		boolean isCanLogin = bcryptUtil.checkPassword(request.getPassword(), findUser.getPassword());
 
-		if(!isCanLogin)
+		if (!isCanLogin)
 			throw new CustomException(CustomExceptionType.WRONG_PASSWORD_EXCEPTION);
 
-		findByUserEmail.get().setRecentLoginIp(getClientIp(httpRequest));
-		findByUserEmail.get().setRecentLoginTime(LocalDateTime.now());
+		userActivity.get().setRecentLoginIp(getClientIp(httpRequest));
+		userActivity.get().setRecentLoginTime(LocalDateTime.now());
 
 		Optional<UserAmount> findUserAmount = userAmountRepository.findById(findUser.getId());
 
@@ -147,7 +151,7 @@ public class UserServiceImpl implements UserService{
 	public void withdrawalUser(WithdrawalUserRequest request) {
 		Optional<User> findById = userRepository.findById(request.getId());
 
-		if(!findById.isPresent())
+		if (!findById.isPresent())
 			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
 		findById.get().withdrawalUser();
@@ -178,12 +182,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public String getVerifyEmail(String uuid) {
-		log.info(""+uuid);
+		log.info("" + uuid);
 		String key = uuid;
 		String email = redisTemplate.opsForValue().get(key);
-		if(email == null){
+		if (email == null) {
 			return "<script>alert('인증 기간이 만료되었습니다') window.close();</script>";
-		}else{
+		} else {
 			Optional<User> findByEmail = userRepository.findByEmail(email);
 			findByEmail.get().setUserActive(true);
 			return "<script>alert('메일 인증이 완료되었습니다'); window.close();</script>";
@@ -195,7 +199,7 @@ public class UserServiceImpl implements UserService{
 	public int changeUserAmount(AmountChangeRequest request) {
 
 		Optional<UserAmount> findUserAmount = userAmountRepository.findById(request.getUserId());
-		if(!findUserAmount.isPresent())
+		if (!findUserAmount.isPresent())
 			throw new CustomException(CustomExceptionType.USER_NOT_FOUND);
 
 		findUserAmount.get().setUserAmount(findUserAmount.get().getUserAmount() + request.getAmount());

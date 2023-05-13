@@ -85,10 +85,11 @@ public class LogServiceImpl implements LogService{
 	public void saveClearLog(ClearLogRequest request) {
 		InGameClearLog inGameClearLog = null;
 		//log.info("cleared? = " + request.isCleared());
+		Optional<GameInfo> gameInfo = gameInfoRepository.findById(request.getGameId());
+		if(!gameInfo.isPresent())
+			throw new CustomException(CustomExceptionType.GAME_NOT_FOUND);
+
 		if(request.isCleared()){
-			Optional<GameInfo> gameInfo = gameInfoRepository.findById(request.getGameId());
-			if(!gameInfo.isPresent())
-				throw new CustomException(CustomExceptionType.GAME_NOT_FOUND);
 
 			// 클리어까지 걸린 시간
 			Long spentTime = gameInfo.get().getStartTime().until(LocalDateTime.now(), ChronoUnit.SECONDS);
@@ -105,12 +106,14 @@ public class LogServiceImpl implements LogService{
 			gameInfo.get().setGameStatus(GameStatus.NORMAL_END);
 			gameInfoRepository.save(gameInfo.get());
 		}else{
+			Long spentTime = gameInfo.get().getStartTime().until(LocalDateTime.now(), ChronoUnit.SECONDS);
+
 			inGameClearLog = InGameClearLog.builder()
 				.gameId(request.getGameId())
 				.userId(request.getUserId())
 				.cleared(request.isCleared())
 				.endTime(null)
-				.spentTime(null)
+				.spentTime(spentTime)
 				.build();
 		}
 

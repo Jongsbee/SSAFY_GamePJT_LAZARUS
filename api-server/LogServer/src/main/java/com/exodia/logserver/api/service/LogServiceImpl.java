@@ -112,7 +112,7 @@ public class LogServiceImpl implements LogService{
 				.gameId(request.getGameId())
 				.userId(request.getUserId())
 				.cleared(request.isCleared())
-				.endTime(null)
+				.endTime(LocalDateTime.now())
 				.spentTime(spentTime)
 				.build();
 		}

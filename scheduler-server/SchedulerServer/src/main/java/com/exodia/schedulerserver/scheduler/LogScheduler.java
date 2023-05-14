@@ -16,7 +16,7 @@ import com.exodia.schedulerserver.db.entity.InGameUseLog;
 import com.exodia.schedulerserver.db.entity.ItemStatistic;
 import com.exodia.schedulerserver.db.entity.User;
 import com.exodia.schedulerserver.db.entity.UserActivity;
-import com.exodia.schedulerserver.db.entity.UserRecord;
+import com.exodia.schedulerserver.db.entity.GamePlayRecord;
 import com.exodia.schedulerserver.db.repository.GameInfoRepository;
 import com.exodia.schedulerserver.db.repository.InGameClearLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameCraftLogRepository;
@@ -25,8 +25,6 @@ import com.exodia.schedulerserver.db.repository.InGameQuestLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameUseLogRepository;
 import com.exodia.schedulerserver.db.repository.ItemStatisticRepository;
 import com.exodia.schedulerserver.db.repository.UserActivityRepository;
-import com.exodia.schedulerserver.db.repository.UserAmountLogRepository;
-import com.exodia.schedulerserver.db.repository.UserAmountRepository;
 import com.exodia.schedulerserver.db.repository.UserRecordRepository;
 import com.exodia.schedulerserver.db.repository.UserRepository;
 import com.exodia.schedulerserver.dto.enums.CreatureType;
@@ -88,7 +86,7 @@ public class  LogScheduler {
 				// 총 클리어한 퀫스트 개수
 				int questCnt = inGameQuestLogRepository.countByUserIdAndGameId(findUser.get().getId(), gi.getId());
 
-				UserRecord userRecord = UserRecord.builder()
+				GamePlayRecord gamePlayRecord = GamePlayRecord.builder()
 					.user(findUser.get())
 					.gameId(gi.getId())
 					.gameEndTime(gi.getEndTime())
@@ -100,7 +98,7 @@ public class  LogScheduler {
 					.totalQuestClearCnt(questCnt)
 					.build();
 
-				userRecordRepository.save(userRecord);
+				userRecordRepository.save(gamePlayRecord);
 
 				Optional<UserActivity> userActivity = userActivityRepository.findById(i);
 

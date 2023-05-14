@@ -16,7 +16,7 @@ import com.exodia.schedulerserver.db.entity.InGameUseLog;
 import com.exodia.schedulerserver.db.entity.ItemStatistic;
 import com.exodia.schedulerserver.db.entity.User;
 import com.exodia.schedulerserver.db.entity.UserActivity;
-import com.exodia.schedulerserver.db.entity.UserRecord;
+import com.exodia.schedulerserver.db.entity.GamePlayRecord;
 import com.exodia.schedulerserver.db.repository.GameInfoRepository;
 import com.exodia.schedulerserver.db.repository.InGameClearLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameCraftLogRepository;
@@ -89,7 +89,7 @@ public class TestController {
 				// 총 클리어한 퀫스트 개수
 				int questCnt = inGameQuestLogRepository.countByUserIdAndGameId(findUser.get().getId(), gi.getId());
 
-				UserRecord userRecord = UserRecord.builder()
+				GamePlayRecord gamePlayRecord = GamePlayRecord.builder()
 					.user(findUser.get())
 					.gameId(gi.getId())
 					.gameEndTime(gi.getEndTime())
@@ -101,7 +101,7 @@ public class TestController {
 					.totalQuestClearCnt(questCnt)
 					.build();
 
-				userRecordRepository.save(userRecord);
+				userRecordRepository.save(gamePlayRecord);
 
 				Optional<UserActivity> userActivity = userActivityRepository.findById(i);
 

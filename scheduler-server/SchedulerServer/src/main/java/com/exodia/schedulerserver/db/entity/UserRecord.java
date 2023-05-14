@@ -57,7 +57,7 @@ public class UserRecord {
 	private boolean userEscape;
 
 	@Column(name = "spent_time")
-	private Long spentTime;
+	private long spentTime;
 
 	@Column(name = "quest_completed_count")
 	private int totalQuestClearCnt;

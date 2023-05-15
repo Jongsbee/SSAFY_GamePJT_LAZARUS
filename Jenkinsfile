@@ -122,7 +122,7 @@ pipeline {
                             echo "Front Deploy Step"
                             sh """
                                 sed -i 's/msa-admin-front:\\([^:]*\\)/msa-admin-front:${env.BUILD_NUMBER}/g' servers/admin-front.yaml
-                                git add front/admin-front.yaml
+                                git add servers/admin-front.yaml
                                 git commit -m 'Update msa-admin-front tag to ${env.BUILD_NUMBER}'
                             """
                         } else if(env.BRANCH_NAME == 'api-server/member') {

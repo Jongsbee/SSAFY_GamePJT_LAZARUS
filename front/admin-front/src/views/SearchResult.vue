@@ -127,7 +127,7 @@
                 block
                 variant="secondary"
                 v-if="games.length % 10 === 0 && games.length !== 0"
-                class="mt-3"
+                class="mt-3 button_size"
                 >전적 더보기</b-button
             >
         </div>
@@ -308,13 +308,13 @@ export default {
 <style scoped>
 .table {
     margin: 0 auto;
-    width: 60vw;
+    width: 1150px;
 }
 .text_bold {
     font-weight: bold;
 }
 .main {
-    width: 70vw; /* 화면 너비의 10% */
+    width: 1400px; /* 화면 너비의 10% */
     background-color: #f2f2f2;
 }
 .text_big {
@@ -328,5 +328,8 @@ export default {
 .bg_white {
     background-color: white;
     border: 1px solid #ccc;
+}
+.button_size {
+    width: 1150px;
 }
 </style>

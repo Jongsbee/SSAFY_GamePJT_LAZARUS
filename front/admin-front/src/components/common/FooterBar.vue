@@ -52,7 +52,7 @@ export default {
 .footer {
     position: fixed;
     bottom: 0;
-    width: 60%;
+    width: 1400px;
     height: 50px;
 }
 

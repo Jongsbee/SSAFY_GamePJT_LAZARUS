@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
 			.build();
 		userAmountRepository.save(userAmount);
 
+		sendVerificationMail(saveUser.getEmail());
 	}
 
 	@Override

@@ -112,18 +112,26 @@
                             'background-color': game.result === '탈출' ? '#CEE3F6' : '#F5A9A9',
                         }"
                     >
-                        <td>{{ game.result }}</td>
-                        <td>{{ game.normal }}</td>
-                        <td>{{ game.elite }}</td>
-                        <td>{{ game.item }}</td>
-                        <td>{{ game.quest }}</td>
-                        <td>{{ game.gameTime }}</td>
-                        <td>{{ game.when }}</td>
+                        <td class="text_bold">{{ game.result }}</td>
+                        <td class="text_bold">{{ game.normal }}</td>
+                        <td class="text_bold">{{ game.elite }}</td>
+                        <td class="text_bold">{{ game.item }}</td>
+                        <td class="text_bold">{{ game.quest }}</td>
+                        <td class="text_bold">{{ game.gameTime }}</td>
+                        <td class="text_bold">{{ game.when }} 전</td>
                     </tr>
                 </tbody>
             </table>
+            <b-button
+                @click="findUserRecord"
+                block
+                variant="secondary"
+                v-if="games.length % 10 === 0 && games.length !== 0"
+                class="mt-3"
+                >전적 더보기</b-button
+            >
         </div>
-        <div v-if="player.normalKill === null" class="mt-5">
+        <div v-if="player.normalKill === null" class="mt-5 width_full">
             <span class="text_big" style="color: #bdbdbd">사용자 정보가 존재하지 않습니다.</span>
         </div>
     </div>
@@ -138,6 +146,7 @@ export default {
             nickname: "",
             isSearch: true,
             searchParam: "",
+            pageNum: 0,
             player: {
                 normalKill: null,
                 eliteKill: null,
@@ -151,110 +160,43 @@ export default {
                 longestSurvival: null,
                 shortestEscape: null,
             },
-            games: [
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "사망",
-                    normal: 5,
-                    elite: 0,
-                    item: 2,
-                    quest: 2,
-                    gameTime: "8분15초",
-                    when: "4일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "탈출",
-                    normal: 30,
-                    elite: 4,
-                    item: 13,
-                    quest: 13,
-                    gameTime: "52분32초",
-                    when: "3일전",
-                },
-                {
-                    result: "사망",
-                    normal: 5,
-                    elite: 0,
-                    item: 2,
-                    quest: 2,
-                    gameTime: "8분15초",
-                    when: "4일전",
-                },
-                {
-                    result: "사망",
-                    normal: 5,
-                    elite: 0,
-                    item: 2,
-                    quest: 2,
-                    gameTime: "8분15초",
-                    when: "4일전",
-                },
-                // 나머지 게임 데이터...
-            ],
+            games: [],
         };
     },
-    mounted() {
+    created() {
+        this.games = [];
+        this.pageNum = 0;
         this.findUserInfo();
     },
     watch: {
         isSearch: function () {
+            this.games = [];
+            this.pageNum = 0;
             this.findUserInfo();
         },
     },
     methods: {
+        findUserRecord() {
+            let pageCnt = this.pageNum;
+            console.log(pageCnt);
+            axios
+                .get(process.env.VUE_APP_SERVER_URL + "/search/record", {
+                    params: {
+                        nickname: this.searchParam, // 쿼리 파라미터로 보낼 값
+                        page: pageCnt,
+                    },
+                })
+                .then((response) => {
+                    // 요청 성공 시 처리할 로직
+                    console.log(response.data);
+                    this.pageNum++;
+                    for (let index = 0; index < response.data.length; index++) {
+                        const element = response.data[index];
+                        this.games.push(element);
+                    }
+                })
+                .catch(() => {});
+        },
         findUserInfo() {
             console.log(process.env.VUE_APP_SERVER_URL);
             this.searchParam = this.$route.query.q;
@@ -293,6 +235,7 @@ export default {
                     alert("존재하지 않는 사용자입니다.");
                     //this.$router.push({ name: "home" });
                 });
+            this.findUserRecord();
         },
         getShortestTime(seconds) {
             const hours = Math.floor(seconds / 3600);
@@ -349,6 +292,7 @@ export default {
                 longestSurvival: null,
                 shortestEscape: null,
             };
+
             let param = this.nickname.replace(/\s/g, "");
             this.$router.push({ name: "SearchResult", query: { q: param } });
             if (this.isSearch) {

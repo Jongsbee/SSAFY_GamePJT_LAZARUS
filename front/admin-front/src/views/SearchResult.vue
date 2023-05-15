@@ -308,12 +308,13 @@ export default {
 <style scoped>
 .table {
     margin: 0 auto;
+    width: 60vw;
 }
 .text_bold {
     font-weight: bold;
 }
 .main {
-    width: 60%;
+    width: 70vw; /* 화면 너비의 10% */
     background-color: #f2f2f2;
 }
 .text_big {

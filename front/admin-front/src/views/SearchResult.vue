@@ -13,7 +13,10 @@
                 </b-input-group-append>
             </b-input-group>
         </div>
-        <div class="d-flex flex-column align-items-center mx-auto main px-3 py-3 mt-3">
+        <div
+            class="d-flex flex-column align-items-center mx-auto main px-3 py-3 mt-3"
+            v-if="player.normalKill !== null"
+        >
             <b-container class="player_info my-5">
                 <b-row>
                     <b-col cols="2" class="d-flex justify-content-center">
@@ -120,6 +123,9 @@
                 </tbody>
             </table>
         </div>
+        <div v-if="player.normalKill === null" class="mt-5">
+            <span class="text_big" style="color: #bdbdbd">사용자 정보가 존재하지 않습니다.</span>
+        </div>
     </div>
 </template>
 
@@ -130,6 +136,7 @@ export default {
     data() {
         return {
             nickname: "",
+            isSearch: true,
             searchParam: "",
             player: {
                 normalKill: null,
@@ -239,45 +246,54 @@ export default {
             ],
         };
     },
-    created() {
-        this.searchParam = this.$route.query.q;
-        console.log(this.searchParam);
-        if (this.searchParam === undefined) {
-            alert("잘못된 접근입니다");
-            this.$router.push({ name: "home" });
-        }
-
-        axios
-            .get("http://localhost:8080/search/user", {
-                params: {
-                    nickname: this.searchParam, // 쿼리 파라미터로 보낼 값
-                },
-            })
-            .then((response) => {
-                // 요청 성공 시 처리할 로직
-                let userData = response.data;
-
-                this.player.normalKill = userData.normalMonsterKills;
-                this.player.eliteKill = userData.eliteMonsterKills;
-                this.player.doEscape = userData.totalEscapeCount;
-                this.player.die = userData.deathCount;
-                this.player.quest = userData.totalQuestCompleted;
-                this.player.item = userData.totalItemCrafted;
-                this.player.totalGame = this.player.die + this.player.doEscape;
-                this.player.escapePercentage = (
-                    (this.player.doEscape / this.player.totalGame) *
-                    100
-                ).toFixed(0);
-                this.getShortestTime(userData.shortestEscapeTime);
-                this.getLogestTime(userData.longestSurvivalTime);
-                this.getTotalPlayTime(userData.totalPlayTime);
-            })
-            .catch(() => {
-                alert("존재하지 않는 사용자입니다.");
-                this.$router.push({ name: "home" });
-            });
+    mounted() {
+        this.findUserInfo();
+    },
+    watch: {
+        isSearch: function () {
+            this.findUserInfo();
+        },
     },
     methods: {
+        findUserInfo() {
+            console.log(process.env.VUE_APP_SERVER_URL);
+            this.searchParam = this.$route.query.q;
+            console.log(this.searchParam);
+            if (this.searchParam === undefined) {
+                alert("잘못된 접근입니다");
+                this.$router.push({ name: "home" });
+            }
+
+            axios
+                .get(process.env.VUE_APP_SERVER_URL + "/search/user", {
+                    params: {
+                        nickname: this.searchParam, // 쿼리 파라미터로 보낼 값
+                    },
+                })
+                .then((response) => {
+                    // 요청 성공 시 처리할 로직
+                    let userData = response.data;
+
+                    this.player.normalKill = userData.normalMonsterKills;
+                    this.player.eliteKill = userData.eliteMonsterKills;
+                    this.player.doEscape = userData.totalEscapeCount;
+                    this.player.die = userData.deathCount;
+                    this.player.quest = userData.totalQuestCompleted;
+                    this.player.item = userData.totalItemCrafted;
+                    this.player.totalGame = this.player.die + this.player.doEscape;
+                    this.player.escapePercentage = (
+                        (this.player.doEscape / this.player.totalGame) *
+                        100
+                    ).toFixed(0);
+                    this.getShortestTime(userData.shortestEscapeTime);
+                    this.getLogestTime(userData.longestSurvivalTime);
+                    this.getTotalPlayTime(userData.totalPlayTime);
+                })
+                .catch(() => {
+                    alert("존재하지 않는 사용자입니다.");
+                    //this.$router.push({ name: "home" });
+                });
+        },
         getShortestTime(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
@@ -320,9 +336,26 @@ export default {
             if (this.nickname === this.searchParam) {
                 return;
             }
+            this.player = {
+                normalKill: null,
+                eliteKill: null,
+                escapePercentage: null,
+                totalGame: null,
+                doEscape: null,
+                die: null,
+                quest: null,
+                item: null,
+                playTime: null,
+                longestSurvival: null,
+                shortestEscape: null,
+            };
             let param = this.nickname.replace(/\s/g, "");
             this.$router.push({ name: "SearchResult", query: { q: param } });
-            location.reload();
+            if (this.isSearch) {
+                this.isSearch = false;
+            } else {
+                this.isSearch = true;
+            }
         },
     },
 };

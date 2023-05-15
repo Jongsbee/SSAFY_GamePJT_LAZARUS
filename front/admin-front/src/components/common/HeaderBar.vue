@@ -2,7 +2,7 @@
     <div class="header">
         <b-navbar type="dark" variant="dark">
             <b-navbar-nav>
-                <b-navbar-brand href="#" class="bold_text" @click="goHome">MSA.GG</b-navbar-brand>
+                <b-navbar-brand href="#" class="bold_text" @click="goHome">MSA</b-navbar-brand>
                 <b-nav-item><span class="text-white mx-3">통계</span></b-nav-item>
                 <b-nav-item><span class="text-white">랭킹</span></b-nav-item>
             </b-navbar-nav>

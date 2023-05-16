@@ -1,5 +1,7 @@
 package com.exodia.logserver.api.controller;
 
+import com.exodia.logserver.dto.request.*;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,11 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exodia.logserver.api.service.LogService;
-import com.exodia.logserver.dto.request.ClearLogRequest;
-import com.exodia.logserver.dto.request.CraftLogRequest;
-import com.exodia.logserver.dto.request.HuntLogRequest;
-import com.exodia.logserver.dto.request.QuestLogRequest;
-import com.exodia.logserver.dto.request.UseLogRequest;
 import com.exodia.logserver.dto.response.SuccessResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,6 +42,16 @@ public class LogController {
 	@PostMapping("/use")
 	public ResponseEntity saveUseLog(@RequestBody UseLogRequest useLogRequest){
 		logService.saveUseLog(useLogRequest);
+		return ResponseEntity.ok(new SuccessResponse("저장 완료"));
+	}
+
+	@Operation(summary = "아이템 먹방 로그 저장", description = "어아탬 먹방 로그 저장 메소드,  "
+			+ "gameId : 방의 고유한 UUID 를 넣어주면 됩니다  "
+			+ "userId : 아이템을 제작한 유저의 번호를 넣어주면 됩니다  "
+			+ "itemId : 소비한  아이템의 번호를 넣어주면 됩니다.")
+	@PostMapping("/eat")
+	public ResponseEntity saveEatLog(@RequestBody EatLogRequest eatLogRequest){
+		logService.saveEatLog(eatLogRequest);
 		return ResponseEntity.ok(new SuccessResponse("저장 완료"));
 	}
 

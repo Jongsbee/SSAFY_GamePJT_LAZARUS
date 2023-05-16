@@ -4,29 +4,15 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
+import com.exodia.logserver.db.entity.*;
+import com.exodia.logserver.db.repository.*;
+import com.exodia.logserver.dto.request.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exodia.logserver.common.exception.CustomException;
 import com.exodia.logserver.common.exception.CustomExceptionType;
-import com.exodia.logserver.db.entity.GameInfo;
-import com.exodia.logserver.db.entity.InGameClearLog;
-import com.exodia.logserver.db.entity.InGameCraftLog;
-import com.exodia.logserver.db.entity.InGameHuntLog;
-import com.exodia.logserver.db.entity.InGameQuestLog;
-import com.exodia.logserver.db.entity.InGameUseLog;
-import com.exodia.logserver.db.repository.GameInfoRepository;
-import com.exodia.logserver.db.repository.InGameClearLogRepository;
-import com.exodia.logserver.db.repository.InGameCraftLogRepository;
-import com.exodia.logserver.db.repository.InGameHuntLogRepository;
-import com.exodia.logserver.db.repository.InGameQuestLogRepository;
-import com.exodia.logserver.db.repository.InGameUseLogRepository;
 import com.exodia.logserver.dto.enums.GameStatus;
-import com.exodia.logserver.dto.request.ClearLogRequest;
-import com.exodia.logserver.dto.request.CraftLogRequest;
-import com.exodia.logserver.dto.request.HuntLogRequest;
-import com.exodia.logserver.dto.request.QuestLogRequest;
-import com.exodia.logserver.dto.request.UseLogRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +29,7 @@ public class LogServiceImpl implements LogService{
 	private final GameInfoRepository gameInfoRepository;
 	private final InGameQuestLogRepository inGameQuestLogRepository;
 	private final InGameUseLogRepository inGameUseLogRepository;
+	private final InGameEatRepository inGameEatRepository;
 
 	@Override
 	public void saveCraftLog(CraftLogRequest request) {
@@ -66,6 +53,19 @@ public class LogServiceImpl implements LogService{
 			.build();
 
 		inGameUseLogRepository.save(inGameUseLog);
+	}
+
+	@Override
+	public void saveEatLog(EatLogRequest eatLogRequest) {
+		InGameEatLog inGameEatLog = InGameEatLog.builder()
+				.gameId(eatLogRequest.getGameId())
+				.userId(eatLogRequest.getUserId())
+				.itemId(eatLogRequest.getItemId())
+				.useTime(LocalDateTime.now())
+				.build();
+
+		inGameEatRepository.save(inGameEatLog);
+
 	}
 
 	@Override

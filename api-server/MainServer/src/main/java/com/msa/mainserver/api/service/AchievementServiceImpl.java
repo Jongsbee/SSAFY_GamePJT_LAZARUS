@@ -12,8 +12,10 @@ import com.msa.mainserver.common.exception.CustomExceptionType;
 import com.msa.mainserver.db.entity.Achievement;
 import com.msa.mainserver.db.entity.User;
 import com.msa.mainserver.db.entity.UserAchievement;
+import com.msa.mainserver.db.entity.UserAmount;
 import com.msa.mainserver.db.repository.AchievementRepository;
 import com.msa.mainserver.db.repository.UserAchievementRepository;
+import com.msa.mainserver.db.repository.UserAmountRepository;
 import com.msa.mainserver.db.repository.UserRepository;
 import com.msa.mainserver.dto.request.AchievementUpdateRequest;
 import com.msa.mainserver.dto.response.AchievementResponse;
@@ -30,6 +32,7 @@ public class AchievementServiceImpl implements AchievementService {
 
 	private final UserAchievementRepository userAchievementRepository;
 	private final AchievementRepository achievementRepository;
+	private final UserAmountRepository userAmountRepository;
 
 	@Override
 	public List<AchievementResponse> getAchievements(long userId) {
@@ -39,10 +42,8 @@ public class AchievementServiceImpl implements AchievementService {
 		if (userAchievements.isEmpty())
 			throw new CustomException(CustomExceptionType.USER_ACHIEVEMENT_NOT_FOUND);
 
-		List<AchievementResponse> achievementResponses = userAchievements.stream()
+		return userAchievements.stream()
 			.map(AchievementResponse::fromUserAchievement).collect(Collectors.toList());
-
-		return achievementResponses;
 	}
 
 	@Override
@@ -77,6 +78,9 @@ public class AchievementServiceImpl implements AchievementService {
 				userAchievement.setAchievementProgress(achievement.getAchievementCondition())
 					.setAchievementDone(true)
 					.setUserAchievementDate(LocalDateTime.now());
+				UserAmount userAmount = userAmountRepository.findById(request.getUserId()).orElseThrow(
+					() -> new CustomException(CustomExceptionType.USER_AMOUNT_NOT_FOUND));
+				userAmount.setUserAmount(userAmount.getUserAmount() + achievement.getAchievementReward());
 			}
 
 		}

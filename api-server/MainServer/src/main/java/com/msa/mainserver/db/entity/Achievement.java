@@ -36,4 +36,8 @@ public class Achievement {
 	@Column(name = "achievement_condition", nullable = false)
 	private int achievementCondition;
 
+	@NotNull
+	@Column(name = "achievement_reward", nullable = false)
+	private Integer achievementReward;
+
 }

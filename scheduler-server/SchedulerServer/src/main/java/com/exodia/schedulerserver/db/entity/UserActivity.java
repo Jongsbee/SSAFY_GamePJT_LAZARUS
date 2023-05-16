@@ -67,6 +67,12 @@ public class UserActivity {
 	@Column(name = "total_play_time", nullable = false)
 	private int totalPlayTime;
 
+	@Column(name = "total_item_used", nullable = false)
+	private int totalItemUsed;
+
+	@Column(name = "total_item_eaten", nullable = false)
+	private int totalItemEaten;
+
 	public void changeEscapeAndDeathCnt(boolean isEscape){
 		if(isEscape){
 			this.totalEscapeCount++;
@@ -99,6 +105,8 @@ public class UserActivity {
 	public void increaseItemCraftedCnt(int cnt){
 		this.totalItemCrafted+=cnt;
 	}
+	public void increaseItemUseCnt(int cnt){this.totalItemUsed+=cnt;}
+	public void increaseItemEatCnt(int cnt){this.totalItemEaten+=cnt;}
 
 	public void increaseQuestCompletedCnt(int cnt){
 		this.totalQuestCompleted+=cnt;

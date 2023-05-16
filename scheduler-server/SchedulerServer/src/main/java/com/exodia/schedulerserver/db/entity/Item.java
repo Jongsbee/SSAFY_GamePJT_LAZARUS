@@ -35,4 +35,8 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemType itemType;
 
+    @NotNull
+    @Column(name = "item_eatable", nullable = false)
+    private boolean itemEatable;
+
 }

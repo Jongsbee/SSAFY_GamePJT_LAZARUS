@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.exodia.schedulerserver.db.repository.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,16 +18,6 @@ import com.exodia.schedulerserver.db.entity.ItemStatistic;
 import com.exodia.schedulerserver.db.entity.User;
 import com.exodia.schedulerserver.db.entity.UserActivity;
 import com.exodia.schedulerserver.db.entity.GamePlayRecord;
-import com.exodia.schedulerserver.db.repository.GameInfoRepository;
-import com.exodia.schedulerserver.db.repository.InGameClearLogRepository;
-import com.exodia.schedulerserver.db.repository.InGameCraftLogRepository;
-import com.exodia.schedulerserver.db.repository.InGameHuntLogRepository;
-import com.exodia.schedulerserver.db.repository.InGameQuestLogRepository;
-import com.exodia.schedulerserver.db.repository.InGameUseLogRepository;
-import com.exodia.schedulerserver.db.repository.ItemStatisticRepository;
-import com.exodia.schedulerserver.db.repository.UserActivityRepository;
-import com.exodia.schedulerserver.db.repository.UserRecordRepository;
-import com.exodia.schedulerserver.db.repository.UserRepository;
 import com.exodia.schedulerserver.dto.enums.CreatureType;
 
 import lombok.RequiredArgsConstructor;
@@ -46,8 +37,9 @@ public class  LogScheduler {
 	private final InGameQuestLogRepository inGameQuestLogRepository;
 	private final InGameUseLogRepository inGameUseLogRepository;
 	private final ItemStatisticRepository itemStatisticRepository;
+	private final InGameEatLogRepository inGameEatLogRepository;
 
-	@Scheduled(cron = "0 0 0 * * ?")
+	@Scheduled(fixedRate = 3600000)
 	public void InsertDataByLog(){
 
 		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
@@ -66,6 +58,8 @@ public class  LogScheduler {
 
 				//아이템 제작 횟수
 				int craftCount = inGameCraftLogRepository.countByUserIdAndGameId(findUser.get().getId(), gi.getId());
+				int useCount = inGameUseLogRepository.countByUserIdAndGameId(findUser.get().getId(), gi.getId());
+				int eatCount = inGameEatLogRepository.countByUserIdAndGameId(findUser.get().getId(), gi.getId());
 				//몬스터 사냥 횟수
 				List<InGameHuntLog> huntLogs = inGameHuntLogRepository.findByUserIdAndGameId(
 					findUser.get().getId(), gi.getId());
@@ -108,6 +102,8 @@ public class  LogScheduler {
 				userActivity.get().increaseMonsterKills(normalCnt, eliteCnt);
 				userActivity.get().increaseItemCraftedCnt(craftCount);
 				userActivity.get().increaseQuestCompletedCnt(questCnt);
+				userActivity.get().increaseItemUseCnt(useCount);
+				userActivity.get().increaseItemEatCnt(eatCount);
 
 			}
 

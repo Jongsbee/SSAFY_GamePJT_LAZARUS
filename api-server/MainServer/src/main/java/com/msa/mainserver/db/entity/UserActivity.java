@@ -67,4 +67,10 @@ public class UserActivity {
 	@Column(name = "total_play_time", nullable = false)
 	private int totalPlayTime;
 
+    @Column(name = "total_item_used", nullable = false)
+    private int totalItemUsed;
+
+    @Column(name = "total_item_eaten", nullable = false)
+    private int totalItemEaten;
+
 }

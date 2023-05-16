@@ -27,4 +27,8 @@ public class Item {
     @Column(name = "item_type", length = 20)
     private ItemType itemType;
 
+    @NotNull
+    @Column(name = "item_eatable", nullable = false)
+    private boolean itemEatable;
+
 }

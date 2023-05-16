@@ -57,6 +57,8 @@ public class UserController {
 	@Operation(summary = "중복체크", description = "중복체크 메서드.")
 	public ResponseEntity<SuccessResponse> checkDuplicateInfo(@RequestBody CheckDuplicateRequest request) {
 		userService.checkDuplicateInfo(request);
+		log.info("들어온 정보 ================== " +request.getType());
+		log.info("들어온 정보 ================== " +request.getInfo());
 		return ResponseEntity.ok(new SuccessResponse("사용 가능"));
 	}
 

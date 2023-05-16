@@ -79,6 +79,8 @@ public class UserServiceImpl implements UserService {
 			.deathCount(0)
 			.totalQuestCompleted(0)
 			.totalItemCrafted(0)
+			.totalItemUsed(0)
+			.totalItemEaten(0)
 			.totalEscapeCount(0)
 			.totalPlayTime(0)
 			.build();

@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column align-items-center justify-content-center mt-2">
+    <div class="d-flex flex-column align-items-center justify-content-center">
         <footer class="footer" :class="{ relative: isFooterRelative }">
             <p>
                 &copy; EXODIA | <span style="color: #d8d8d8">이용약관</span> |
@@ -51,9 +51,10 @@ export default {
 <style scoped>
 .footer {
     position: fixed;
-    bottom: 0;
-    width: 1400px;
+    bottom: -10px;
+    width: 100%;
     height: 50px;
+    background-color: #343a40;
 }
 
 .relative {

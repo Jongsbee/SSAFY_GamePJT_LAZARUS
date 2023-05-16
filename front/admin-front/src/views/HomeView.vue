@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container d-flex flex-column">
         <div class="row justify-content-center">
             <img
                 v-bind="mainProps"
@@ -61,6 +61,7 @@ export default {
 
 .container {
     display: flex;
+    height: 100vh;
 }
 
 .row {
@@ -72,5 +73,10 @@ export default {
 }
 .clickable {
     cursor: pointer;
+}
+.bottom-left {
+    position: relative; /* 절대적 위치 설정 */
+    bottom: 0; /* 하단에 배치 */
+    left: 10px; /* 왼쪽에 배치 */
 }
 </style>

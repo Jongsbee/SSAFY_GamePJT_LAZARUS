@@ -1,5 +1,8 @@
 <template>
-    <div class="d-flex flex-column align-items-center justify-content-center">
+    <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="background-color: #f8f8f8"
+    >
         <div class="main mt-3">
             <b-input-group variant="outline-primary">
                 <b-input-group-prepend>
@@ -34,29 +37,29 @@
                     >
                         <div class="text_bold">
                             총 플레이 시간 <br />
-                            <span style="color: #d358f7">{{ player.playTime }}</span>
+                            <span style="color: #6a0888">{{ player.playTime }}</span>
                         </div>
                     </b-col>
                 </b-row>
                 <b-row class="mt-5 mb-3 d-flex align-items-center align-items-stretch">
-                    <b-col cols="3" class="bg_white">
+                    <b-col cols="3" class="bg_white back_ibory">
                         <div class="text_bold">
                             탈출율
                             <span class="text_big">{{ player.escapePercentage }}%</span>
                         </div>
                         <div class="text_bold">
                             <span class="text_sbig">{{ player.totalGame }}</span> 전
-                            <span class="text_sbig" style="color: #81f781">{{
+                            <span class="text_sbig" style="color: #088a08">{{
                                 player.doEscape
                             }}</span>
-                            <span style="color: #81f781">탈출</span>
-                            <span class="text_sbig" style="color: #f5a9a9"> {{ player.die }}</span>
-                            <span style="color: #f5a9a9">사망</span>
+                            <span style="color: #088a08">탈출</span>
+                            <span class="text_sbig" style="color: #8a0829"> {{ player.die }}</span>
+                            <span style="color: #8a0829">사망</span>
                         </div>
                     </b-col>
                     <b-col
                         cols="3"
-                        class="bg_white d-flex flex-column align-items-center justify-content-center"
+                        class="bg_white d-flex flex-column align-items-center justify-content-center back_ibory"
                     >
                         <div class="text_bold">
                             처치힌 일반 몬스터 &nbsp;
@@ -69,7 +72,7 @@
                     </b-col>
                     <b-col
                         cols="3"
-                        class="bg_white d-flex flex-column align-items-center justify-content-center"
+                        class="bg_white d-flex flex-column align-items-center justify-content-center back_ibory"
                     >
                         <div class="text_bold">
                             제작한 아이템 수 &nbsp;
@@ -81,7 +84,7 @@
                         </div>
                     </b-col>
                     <b-col
-                        class="bg_white d-flex flex-column align-items-center justify-content-center"
+                        class="bg_white d-flex flex-column align-items-center justify-content-center back_ibory"
                     >
                         <div class="text_bold">
                             최단 탈출 기록 <br />
@@ -109,7 +112,10 @@
                         v-for="(game, index) in games"
                         :key="index"
                         :style="{
-                            'background-color': game.result === '탈출' ? '#CEE3F6' : '#F5A9A9',
+                            background:
+                                game.result === '탈출'
+                                    ? 'linear-gradient(to bottom, #ADD8E6, #58ACFA)'
+                                    : 'linear-gradient(to bottom, #F8E0E0, #F5A9A9)',
                         }"
                     >
                         <td class="text_bold">{{ game.result }}</td>
@@ -125,15 +131,16 @@
             <b-button
                 @click="findUserRecord"
                 block
-                variant="secondary"
+                style="color: #464b4c"
                 v-if="games.length % 10 === 0 && games.length !== 0"
                 class="mt-3 button_size"
-                >전적 더보기</b-button
+                ><span style="color: white">전적 더보기</span></b-button
             >
         </div>
         <div v-if="player.normalKill === null" class="mt-5 width_full">
             <span class="text_big" style="color: #bdbdbd">사용자 정보가 존재하지 않습니다.</span>
         </div>
+        <div class="bottom-left mt-5">&copy; EXODIA</div>
     </div>
 </template>
 
@@ -315,7 +322,8 @@ export default {
 }
 .main {
     width: 1400px; /* 화면 너비의 10% */
-    background-color: #f2f2f2;
+    background-color: #e5eaef;
+    border: 1px solid #ccc;
 }
 .text_big {
     font-size: 3em;
@@ -331,5 +339,12 @@ export default {
 }
 .button_size {
     width: 1150px;
+}
+.back_ibory {
+    background-color: #fbf5ef;
+}
+.bottom-left {
+    position: relative; /* 절대적 위치 설정 */
+    bottom: 15px; /* 하단에 배치 */
 }
 </style>

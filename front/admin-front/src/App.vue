@@ -2,19 +2,18 @@
     <div>
         <HeaderBar />
         <router-view></router-view>
-        <FooterBar />
     </div>
 </template>
 
 <script>
 import HeaderBar from "@/components/common/HeaderBar.vue";
-import FooterBar from "@/components/common/FooterBar.vue";
+//import FooterBar from "@/components/common/FooterBar.vue";
 
 export default {
     name: "App",
     components: {
         HeaderBar,
-        FooterBar,
+        //FooterBar,
         // 추가 컴포넌트들
     },
 };

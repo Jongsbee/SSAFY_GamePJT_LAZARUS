@@ -212,6 +212,7 @@ export default {
                 alert("잘못된 접근입니다");
                 this.$router.push({ name: "home" });
             }
+            console.log(process.env.VUE_APP_SERVER_URL);
 
             axios
                 .get(process.env.VUE_APP_SERVER_URL + "/search/user", {

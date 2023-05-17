@@ -23,14 +23,15 @@
                     </b-col>
                 </b-row>
                 <b-row class="row_size">
-                    <b-col class="d-flex flex-column col_shape mx-5">
+                    <b-col class="d-flex flex-column col_shape mx-5 align-items-center">
                         <div class="ranking_title d-flex align-items-center justify-content-center">
                             <span class="ranking_title_font"> 많이 사냥된 몬스터 </span>
                         </div>
+                        <canvas ref="MonsterChart" width="500" height="300" class="mt-3"></canvas>
                     </b-col>
                     <b-col class="d-flex flex-column col_shape mx-5">
                         <div class="ranking_title d-flex align-items-center justify-content-center">
-                            <span class="ranking_title_font"> 최근 10게임 </span>
+                            <span class="ranking_title_font"> 최근 10게임 탈출 시간</span>
                         </div>
                     </b-col>
                 </b-row>
@@ -45,6 +46,7 @@ export default {
     mounted() {
         this.renderCraftChart();
         this.renderEatChart();
+        this.renderMonsterChart();
     },
 
     methods: {
@@ -133,6 +135,66 @@ export default {
                                 "#3B170B",
                                 "#8A084B",
                                 "#BDBDBD",
+                            ],
+                        },
+                    ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    responsive: false,
+                    hover: {
+                        mode: "dataset",
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                    // 차트 옵션 설정
+                },
+            });
+        },
+        renderMonsterChart() {
+            const ctx = this.$refs.MonsterChart.getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: [
+                        "암사슴",
+                        "보스암사슴",
+                        "숫사슴",
+                        "보스숫사슴",
+                        "멧돼지",
+                        "늑대",
+                        "보스늑대",
+                        "곰",
+                        "보스곰",
+                        "좀비숫사슴",
+                        "좀비늑대",
+                        "좀비보스곰",
+                        "좀비무스",
+                    ],
+                    datasets: [
+                        {
+                            data: [10, 20, 30, 10, 15, 30, 11, 28, 4, 2, 12, 8, 3],
+                            backgroundColor: [
+                                "#FA5858",
+                                "#F3E2A9",
+                                "#E1F5A9",
+                                "#A9F5D0",
+                                "#81BEF7",
+                                "#F5A9F2",
+                                "#F5A9BC",
+                                "#58FAD0",
+                                "#0B610B",
+                                "#3B170B",
+                                "#8A084B",
+                                "#BDBDBD",
+                                "#BCA9F5",
                             ],
                         },
                     ],

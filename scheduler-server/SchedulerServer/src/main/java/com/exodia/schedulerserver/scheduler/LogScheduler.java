@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.exodia.schedulerserver.db.entity.InGameEatLog;
 import com.exodia.schedulerserver.db.repository.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -42,9 +43,8 @@ public class  LogScheduler {
 	@Scheduled(fixedRate = 3600000)
 	public void InsertDataByLog(){
 
-		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
-		LocalDateTime start = yesterday.toLocalDate().atStartOfDay();
-		LocalDateTime end = start.plusDays(1);
+		LocalDateTime start = LocalDateTime.now().minusHours(1);
+		LocalDateTime end = LocalDateTime.now();
 
 		List<GameInfo> findGames = gameInfoRepository.findByEndTimeBetween(start, end);
 
@@ -118,6 +118,12 @@ public class  LogScheduler {
 			List<InGameUseLog> useLogs = inGameUseLogRepository.findInGameUseLogsByGameId(gi.getId());
 			for(InGameUseLog ul : useLogs){
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(ul.getItemId());
+				itemStatistic.get().increaseTotalUse();
+			}
+
+			List<InGameEatLog> eatLogs = inGameEatLogRepository.findInGameEatLogsByGameId(gi.getId());
+			for(InGameEatLog el : eatLogs){
+				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(el.getItemId());
 				itemStatistic.get().increaseTotalUse();
 			}
 

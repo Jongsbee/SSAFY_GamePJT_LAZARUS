@@ -118,10 +118,6 @@ public class TestController {
 			List<InGameCraftLog> craftLogs = inGameCraftLogRepository.findInGameCraftLogsByGameId(
 				gi.getId());
 			for(InGameCraftLog cl : craftLogs){
-				log.info(cl.getItemId()+"");
-			}
-
-			for(InGameCraftLog cl : craftLogs){
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(cl.getItemId());
 				itemStatistic.get().increaseTotalCraft();
 
@@ -131,6 +127,7 @@ public class TestController {
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(ul.getItemId());
 				itemStatistic.get().increaseTotalUse();
 			}
+			ingameE
 
 		}
 

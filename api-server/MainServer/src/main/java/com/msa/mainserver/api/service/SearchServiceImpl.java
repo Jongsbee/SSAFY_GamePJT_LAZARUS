@@ -8,8 +8,14 @@ import com.msa.mainserver.db.entity.UserActivity;
 import com.msa.mainserver.db.repository.GamePlayRecordRepository;
 import com.msa.mainserver.db.repository.UserActivityRepository;
 import com.msa.mainserver.db.repository.UserRepository;
+import com.msa.mainserver.dto.CraftRankDto;
+import com.msa.mainserver.dto.EscapeRankDto;
+import com.msa.mainserver.dto.HuntRankDto;
+import com.msa.mainserver.dto.QuestRankDto;
 import com.msa.mainserver.dto.response.FindRecordResponse;
 import com.msa.mainserver.dto.response.FindUserResponse;
+import com.msa.mainserver.dto.response.RankingResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +32,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -96,6 +103,45 @@ public class SearchServiceImpl implements SearchService{
 
         return recordResponses;
     }
+
+    @Override
+    public RankingResponse getRanking() {
+        Pageable topThree = PageRequest.of(0, 3);
+        List<UserActivity> top3ShortestEscape = userActivityRepository.findTop3ShortestEscape(topThree);
+        List<UserActivity> top3MonsterKill = userActivityRepository.findTop3MonsterKill(topThree);
+        List<UserActivity> top3ItemCraft = userActivityRepository.findTop3ItemCraft(topThree);
+        List<UserActivity> top3QuestCleared = userActivityRepository.findTop3QuestCleared(topThree);
+
+        List<EscapeRankDto> escapeRankDtoList = top3ShortestEscape.stream().map(escape -> new EscapeRankDto().builder()
+            .nickname(escape.getUser().getNickname())
+            .time(formatDuration(escape.getShortestEscapeTime()))
+            .build()).collect(Collectors.toList());
+
+        List<HuntRankDto> huntRankDtoList = top3MonsterKill.stream().map(hunt -> new HuntRankDto().builder()
+            .nickname(hunt.getUser().getNickname())
+            .cnt(hunt.getNormalMonsterKills() + hunt.getEliteMonsterKills())
+            .build()).collect(Collectors.toList());
+
+        List<CraftRankDto> craftRankDtoList = top3ItemCraft.stream().map(craft -> new CraftRankDto().builder()
+            .nickname(craft.getUser().getNickname())
+            .cnt(craft.getTotalItemCrafted())
+            .build()).collect(Collectors.toList());
+
+        List<QuestRankDto> questRankDtoList = top3QuestCleared.stream().map(quest -> new QuestRankDto().builder()
+            .nickname(quest.getUser().getNickname())
+            .cnt(quest.getTotalQuestCompleted())
+            .build()).collect(Collectors.toList());
+
+        RankingResponse rankingResponse = RankingResponse.builder()
+            .escapeRanks(escapeRankDtoList)
+            .craftRanks(craftRankDtoList)
+            .huntRanks(huntRankDtoList)
+            .questRanks(questRankDtoList)
+            .build();
+
+        return rankingResponse;
+    }
+
     public String formatDuration(long seconds) {
         long hours = seconds / 3600;
         long minutes = (seconds % 3600) / 60;

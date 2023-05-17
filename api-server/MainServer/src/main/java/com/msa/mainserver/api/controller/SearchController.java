@@ -5,6 +5,8 @@ import java.util.List;
 import com.msa.mainserver.api.service.SearchService;
 import com.msa.mainserver.dto.response.FindRecordResponse;
 import com.msa.mainserver.dto.response.FindUserResponse;
+import com.msa.mainserver.dto.response.RankingResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,12 @@ public class SearchController {
     public ResponseEntity findUserRecord(@RequestParam("nickname")String nickname,@RequestParam("page")int page){
         List<FindRecordResponse> userRecord = searchService.findUserRecord(nickname, page);
         return ResponseEntity.ok(userRecord);
+    }
+
+    @GetMapping("/ranking")
+    public ResponseEntity getRanking(){
+        RankingResponse ranking = searchService.getRanking();
+        return ResponseEntity.ok(ranking);
     }
 
 

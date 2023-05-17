@@ -19,7 +19,7 @@
                         <div class="ranking_title d-flex align-items-center justify-content-center">
                             <span class="ranking_title_font"> 음식 아이템 소비 </span>
                         </div>
-                        <canvas ref="EatChart" width="500" height="300" class="mt-3"></canvas>
+                        <canvas ref="eatChart" width="500" height="300" class="mt-3"></canvas>
                     </b-col>
                 </b-row>
                 <b-row class="row_size">
@@ -27,12 +27,13 @@
                         <div class="ranking_title d-flex align-items-center justify-content-center">
                             <span class="ranking_title_font"> 많이 사냥된 몬스터 </span>
                         </div>
-                        <canvas ref="MonsterChart" width="500" height="300" class="mt-3"></canvas>
+                        <canvas ref="monsterChart" width="500" height="300" class="mt-3"></canvas>
                     </b-col>
-                    <b-col class="d-flex flex-column col_shape mx-5">
+                    <b-col class="d-flex flex-column col_shape mx-5 align-items-center">
                         <div class="ranking_title d-flex align-items-center justify-content-center">
                             <span class="ranking_title_font"> 최근 10게임 탈출 시간</span>
                         </div>
+                        <canvas ref="escapeChart" width="500" height="300" class="mt-3"></canvas>
                     </b-col>
                 </b-row>
             </b-container>
@@ -42,15 +43,41 @@
 
 <script>
 import Chart from "chart.js/auto";
+import axios from "axios";
+import moment from "moment";
+
 export default {
+    data() {
+        return {
+            craftItemData: [],
+            usedItemData: [],
+            whenLabelData: [],
+            spentTimeList: [],
+        };
+    },
     mounted() {
-        this.renderCraftChart();
-        this.renderEatChart();
-        this.renderMonsterChart();
+        axios
+            .get(process.env.VUE_APP_SERVER_URL + "/search/statistics")
+            .then((res) => {
+                console.log(res.data);
+                this.craftItemData = res.data.craftItemList;
+                this.usedItemData = res.data.useFoodList;
+                this.whenLabelData = res.data.whenList;
+                this.spentTimeList = res.data.spentTimeList;
+
+                this.renderCraftChart();
+                this.renderEatChart();
+                this.renderMonsterChart();
+                this.renderEscapeChart();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     methods: {
         renderCraftChart() {
+            console.log("data == " + this.craftItemData);
             const ctx = this.$refs.craftChart.getContext("2d");
             new Chart(ctx, {
                 type: "bar",
@@ -67,7 +94,7 @@ export default {
                     ],
                     datasets: [
                         {
-                            data: [10, 20, 30, 10, 15, 30, 11, 28],
+                            data: this.craftItemData,
                             backgroundColor: [
                                 "#FA5858",
                                 "#F3E2A9",
@@ -101,7 +128,7 @@ export default {
             });
         },
         renderEatChart() {
-            const ctx = this.$refs.EatChart.getContext("2d");
+            const ctx = this.$refs.eatChart.getContext("2d");
             new Chart(ctx, {
                 type: "bar",
                 data: {
@@ -121,7 +148,7 @@ export default {
                     ],
                     datasets: [
                         {
-                            data: [10, 20, 30, 10, 15, 30, 11, 28, 4, 2, 12, 8],
+                            data: this.usedItemData,
                             backgroundColor: [
                                 "#FA5858",
                                 "#F3E2A9",
@@ -159,7 +186,7 @@ export default {
             });
         },
         renderMonsterChart() {
-            const ctx = this.$refs.MonsterChart.getContext("2d");
+            const ctx = this.$refs.monsterChart.getContext("2d");
             new Chart(ctx, {
                 type: "bar",
                 data: {
@@ -212,6 +239,55 @@ export default {
                     scales: {
                         y: {
                             beginAtZero: true,
+                        },
+                    },
+                    // 차트 옵션 설정
+                },
+            });
+        },
+        renderEscapeChart() {
+            const ctx = this.$refs.escapeChart.getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: this.whenLabelData,
+                    datasets: [
+                        {
+                            data: this.spentTimeList,
+                            backgroundColor: [
+                                "#FA5858",
+                                "#F3E2A9",
+                                "#E1F5A9",
+                                "#A9F5D0",
+                                "#81BEF7",
+                                "#F5A9F2",
+                                "#F5A9BC",
+                                "#58FAD0",
+                                "#0B610B",
+                                "#3B170B",
+                            ],
+                        },
+                    ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    responsive: false,
+                    hover: {
+                        mode: "dataset",
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value, index, values) {
+                                    console.log(index, values);
+                                    return moment.utc(value * 1000).format("HH:mm:ss");
+                                },
+                            },
                         },
                     },
                     // 차트 옵션 설정

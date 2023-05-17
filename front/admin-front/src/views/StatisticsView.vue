@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column align-items-center justify-content-center ranking_back">
+    <div class="d-flex flex-column align-items-center ranking_back">
         <div class="main d-flex flex-column align-items-center justify-content-start">
             <div>
                 <span class="title_font">📊STATISTICS📊</span>

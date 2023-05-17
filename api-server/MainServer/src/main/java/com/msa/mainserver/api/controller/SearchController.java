@@ -7,6 +7,7 @@ import com.msa.mainserver.dto.response.FindRecordResponse;
 import com.msa.mainserver.dto.response.FindUserResponse;
 import com.msa.mainserver.dto.response.RankingResponse;
 
+import com.msa.mainserver.dto.response.StatisticsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,12 @@ public class SearchController {
     public ResponseEntity getRanking(){
         RankingResponse ranking = searchService.getRanking();
         return ResponseEntity.ok(ranking);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity getStatistics(){
+        StatisticsResponse statistics = searchService.getStatistics();
+        return ResponseEntity.ok(statistics);
     }
 
 

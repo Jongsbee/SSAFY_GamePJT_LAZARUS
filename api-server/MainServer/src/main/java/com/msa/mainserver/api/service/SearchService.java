@@ -5,10 +5,11 @@ import java.util.List;
 import com.msa.mainserver.dto.response.FindRecordResponse;
 import com.msa.mainserver.dto.response.FindUserResponse;
 import com.msa.mainserver.dto.response.RankingResponse;
+import com.msa.mainserver.dto.response.StatisticsResponse;
 
 public interface SearchService {
     public FindUserResponse findUserActivity(String nickname);
     public List<FindRecordResponse> findUserRecord(String nickname, int page);
-
     public RankingResponse getRanking();
+    public StatisticsResponse getStatistics();
 }

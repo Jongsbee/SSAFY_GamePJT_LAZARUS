@@ -6,6 +6,7 @@ import com.msa.mainserver.db.entity.GameplayRecord;
 import com.msa.mainserver.db.entity.User;
 import com.msa.mainserver.db.entity.UserActivity;
 import com.msa.mainserver.db.repository.GamePlayRecordRepository;
+import com.msa.mainserver.db.repository.ItemStatisticRepository;
 import com.msa.mainserver.db.repository.UserActivityRepository;
 import com.msa.mainserver.db.repository.UserRepository;
 import com.msa.mainserver.dto.CraftRankDto;
@@ -16,6 +17,7 @@ import com.msa.mainserver.dto.response.FindRecordResponse;
 import com.msa.mainserver.dto.response.FindUserResponse;
 import com.msa.mainserver.dto.response.RankingResponse;
 
+import com.msa.mainserver.dto.response.StatisticsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,8 +28,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +43,29 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SearchServiceImpl implements SearchService{
+    private final ItemStatisticRepository itemStatisticRepository;
 
     private final UserRepository userRepository;
     private final UserActivityRepository userActivityRepository;
     private final GamePlayRecordRepository gamePlayRecordRepository;
+    private final Long[] craftIds = {60L, 61L, 100L, 101L, 110L, 111L, 120L, 121L};
+    private final Long[] usedIds = {30L, 31L, 32L, 40L, 41L, 42L, 200L, 201L, 202L, 210L, 211L, 212L};
+    private List<Long> craftItemIdList;
+    private List<Long> usedItemIdList;
+
+    @PostConstruct
+    public void init(){
+        craftItemIdList = new ArrayList<>();
+        usedItemIdList = new ArrayList<>();
+
+        for(Long id : craftIds){
+            craftItemIdList.add(id);
+        }
+        for(Long id : usedIds){
+            usedItemIdList.add(id);
+        }
+    }
+
     @Override
     public FindUserResponse findUserActivity(String nickname) {
         Optional<User> findUser = userRepository.findByNickname(nickname);
@@ -140,6 +163,40 @@ public class SearchServiceImpl implements SearchService{
             .build();
 
         return rankingResponse;
+    }
+
+    @Override
+    public StatisticsResponse getStatistics() {
+        Pageable pageable = PageRequest.of(0, 10);
+
+        List<Integer> itemTotalCraftList = itemStatisticRepository.findItemTotalCraftByIdIn(craftItemIdList);
+        List<Integer> itemTotalUsedList = itemStatisticRepository.findItemTotalUsedByIdIn(usedItemIdList);
+
+        Page<GameplayRecord> recentInfoLists = gamePlayRecordRepository.findRecentSpentTimeAndGameEndTime(pageable);
+
+        List<String> timeLists = new ArrayList<>();
+        List<Long> spentTimes = new ArrayList<>();
+
+        for(GameplayRecord gr : recentInfoLists){
+            timeLists.add(formatDate(gr.getGameEndTime()));
+            spentTimes.add(gr.getSpentTime());
+        }
+
+        StatisticsResponse response = StatisticsResponse.builder()
+                .craftItemList(itemTotalCraftList)
+                .useFoodList(itemTotalUsedList)
+                .whenList(timeLists)
+                .huntedMonsterList(null)
+                .spentTimeList(spentTimes)
+                .build();
+
+
+        return response;
+    }
+
+    public String formatDate(LocalDateTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.HH:mm");
+        return time.format(formatter);
     }
 
     public String formatDuration(long seconds) {

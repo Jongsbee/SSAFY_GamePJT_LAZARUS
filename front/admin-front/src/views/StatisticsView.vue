@@ -65,7 +65,6 @@ export default {
                     ],
                     datasets: [
                         {
-                            label: "ON/OFF",
                             data: [10, 20, 30, 10, 15, 30, 11, 28],
                             backgroundColor: [
                                 "#FA5858",
@@ -124,7 +123,6 @@ export default {
                     ],
                     datasets: [
                         {
-                            label: "ON/OFF",
                             data: [10, 20, 30, 10, 15, 30, 11, 28, 4, 2, 12, 8],
                             backgroundColor: [
                                 "#FA5858",

@@ -198,7 +198,7 @@ export default {
 <style scoped>
 .ranking_back {
     background: linear-gradient(to bottom, #fbfbef, #2efec8);
-    height: 100%;
+    height: 1000px;
 }
 .main {
     width: 1600px;
@@ -226,7 +226,7 @@ export default {
 .col_shape {
     border-radius: 60px;
     background-color: white;
-    height: 300px;
+    height: 100%;
 }
 .ranking_title {
     width: 100%;

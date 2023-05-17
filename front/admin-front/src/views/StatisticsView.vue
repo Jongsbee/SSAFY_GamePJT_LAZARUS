@@ -171,11 +171,11 @@ export default {
 <style scoped>
 .ranking_back {
     background: linear-gradient(to bottom, #fbfbef, #2efec8);
-    height: 100%;
+    height: 1200px;
 }
 .main {
     width: 1600px;
-    height: 1100px;
+    height: 100%;
 }
 .title_font {
     font-size: 5em;
@@ -199,7 +199,7 @@ export default {
 .col_shape {
     border-radius: 60px;
     background-color: white;
-    height: 400px;
+    height: 100%;
 }
 .ranking_title {
     width: 100%;

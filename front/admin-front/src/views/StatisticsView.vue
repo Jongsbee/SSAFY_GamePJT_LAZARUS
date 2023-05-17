@@ -30,7 +30,7 @@
                     </b-col>
                     <b-col class="d-flex flex-column col_shape mx-5">
                         <div class="ranking_title d-flex align-items-center justify-content-center">
-                            <span class="ranking_title_font"> 최다 퀘스트 클리어 </span>
+                            <span class="ranking_title_font"> 최근 10게임 </span>
                         </div>
                     </b-col>
                 </b-row>
@@ -90,13 +90,9 @@ export default {
                         mode: "dataset",
                     },
                     scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    beginAtZero: true,
-                                },
-                            },
-                        ],
+                        y: {
+                            beginAtZero: true,
+                        },
                     },
                     // 차트 옵션 설정
                 },
@@ -152,13 +148,9 @@ export default {
                         mode: "dataset",
                     },
                     scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    beginAtZero: true,
-                                },
-                            },
-                        ],
+                        y: {
+                            beginAtZero: true,
+                        },
                     },
                     // 차트 옵션 설정
                 },

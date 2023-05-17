@@ -167,13 +167,29 @@ import axios from "axios";
 export default {
     data() {
         return {
-            timeRank: [],
-            monsterKill: [],
-            itemCraft: [],
-            quetClear: [],
+            timeRank: [
+                { nickname: "", time: "" },
+                { nickname: "", time: "" },
+                { nickname: "", time: "" },
+            ],
+            monsterKill: [
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+            ],
+            itemCraft: [
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+            ],
+            quetClear: [
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+                { nickname: "", cnt: "" },
+            ],
         };
     },
-    created() {
+    mounted() {
         this.findRanking();
     },
     methods: {

@@ -1,6 +1,7 @@
 package com.msa.mainserver.api.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,7 @@ public class UserController {
 	 */
 	@PostMapping("/register")
 	@Operation(summary = "회원가입", description = "회원가입 메서드.")
-	public ResponseEntity<SuccessResponse> userRegister(@RequestBody RegisterRequest registerRequest) {
+	public ResponseEntity<SuccessResponse> userRegister(@Valid @RequestBody RegisterRequest registerRequest) {
 		userService.userRegister(registerRequest);
 		return ResponseEntity.ok(new SuccessResponse("회원가입이 정상적으로 완료되었습니다."));
 	}
@@ -57,8 +58,8 @@ public class UserController {
 	@Operation(summary = "중복체크", description = "중복체크 메서드.")
 	public ResponseEntity<SuccessResponse> checkDuplicateInfo(@RequestBody CheckDuplicateRequest request) {
 		userService.checkDuplicateInfo(request);
-		log.info("들어온 정보 ================== " +request.getType());
-		log.info("들어온 정보 ================== " +request.getInfo());
+		log.info("들어온 정보 ================== " + request.getType());
+		log.info("들어온 정보 ================== " + request.getInfo());
 		return ResponseEntity.ok(new SuccessResponse("사용 가능"));
 	}
 

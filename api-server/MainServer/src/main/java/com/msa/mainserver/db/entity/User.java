@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,13 +30,15 @@ public class User {
 	@Column(name = "user_id", nullable = false)
 	private Long id;
 
+	@Email
 	@Column(name = "email", nullable = false, length = 50, unique = true)
 	private String email;
 
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Column(name = "nickname", nullable = false, length = 50)
+	@Size(min = 1, max = 10)
+	@Column(name = "nickname", nullable = false, length = 10)
 	private String nickname;
 
 	@Column(name = "reg_date", nullable = false)
@@ -43,7 +47,7 @@ public class User {
 	@Column(name = "user_active", nullable = false)
 	private boolean userActive = false;
 
-	public void withdrawalUser(){
+	public void withdrawalUser() {
 		this.userActive = false;
 	}
 

@@ -1,5 +1,5 @@
 {
-    "name": "MSA",
+    "name": "LAZARUS",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -11,6 +11,7 @@
         "axios": "^1.4.0",
         "bootstrap": "^4.6.2",
         "bootstrap-vue": "^2.23.1",
+        "chart.js": "^4.3.0",
         "core-js": "^3.8.3",
         "popper.js": "^1.16.1",
         "portal-vue": "^2.1.7",

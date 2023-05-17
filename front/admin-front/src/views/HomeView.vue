@@ -1,9 +1,9 @@
 <template>
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column main">
         <div class="row justify-content-center">
             <img
                 v-bind="mainProps"
-                src="../assets/home-image.jpg"
+                src="../assets/LAZARUS_logo_horizontal.png"
                 alt="Responsive image"
                 style="display: block"
             />
@@ -30,8 +30,8 @@ export default {
         return {
             nickname: "",
             mainProps: {
-                width: 800,
-                height: 300,
+                width: 720,
+                height: 200,
                 class: "my-5",
             },
         };
@@ -61,7 +61,7 @@ export default {
 
 .container {
     display: flex;
-    height: 100vh;
+    height: 100%;
 }
 
 .row {

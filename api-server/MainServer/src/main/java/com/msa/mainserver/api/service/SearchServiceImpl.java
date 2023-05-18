@@ -3,22 +3,13 @@ package com.msa.mainserver.api.service;
 import com.msa.mainserver.common.exception.CustomException;
 import com.msa.mainserver.common.exception.CustomExceptionType;
 import com.msa.mainserver.db.entity.GameplayRecord;
+import com.msa.mainserver.db.entity.Notice;
 import com.msa.mainserver.db.entity.User;
 import com.msa.mainserver.db.entity.UserActivity;
-import com.msa.mainserver.db.repository.GamePlayRecordRepository;
-import com.msa.mainserver.db.repository.ItemStatisticRepository;
-import com.msa.mainserver.db.repository.MonsterStatisticsRepository;
-import com.msa.mainserver.db.repository.UserActivityRepository;
-import com.msa.mainserver.db.repository.UserRepository;
-import com.msa.mainserver.dto.CraftRankDto;
-import com.msa.mainserver.dto.EscapeRankDto;
-import com.msa.mainserver.dto.HuntRankDto;
-import com.msa.mainserver.dto.QuestRankDto;
-import com.msa.mainserver.dto.response.FindRecordResponse;
-import com.msa.mainserver.dto.response.FindUserResponse;
-import com.msa.mainserver.dto.response.RankingResponse;
+import com.msa.mainserver.db.repository.*;
+import com.msa.mainserver.dto.*;
+import com.msa.mainserver.dto.response.*;
 
-import com.msa.mainserver.dto.response.StatisticsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,12 +35,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SearchServiceImpl implements SearchService{
-
     private final ItemStatisticRepository itemStatisticRepository;
+
     private final UserRepository userRepository;
     private final UserActivityRepository userActivityRepository;
     private final GamePlayRecordRepository gamePlayRecordRepository;
     private final MonsterStatisticsRepository monsterStatisticsRepository;
+    private final NoticeRepository noticeRepository;
     private final Long[] craftIds = {60L, 61L, 100L, 101L, 110L, 111L, 120L, 121L};
     private final Long[] usedIds = {30L, 31L, 32L, 40L, 41L, 42L, 200L, 201L, 202L, 210L, 211L, 212L};
     private List<Long> craftItemIdList;
@@ -173,7 +165,7 @@ public class SearchServiceImpl implements SearchService{
 
         List<Integer> itemTotalCraftList = itemStatisticRepository.findItemTotalCraft(craftItemIdList);
         List<Integer> itemTotalUsedList = itemStatisticRepository.findItemTotalUsed(usedItemIdList);
-        List<Integer> monsterKilledList = monsterStatisticsRepository.findMonsterKilled();
+        List<Integer> monsterKilled = monsterStatisticsRepository.findMonsterKilled();
 
         Page<GameplayRecord> recentInfoLists = gamePlayRecordRepository.findRecentSpentTimeAndGameEndTime(pageable);
 
@@ -189,12 +181,55 @@ public class SearchServiceImpl implements SearchService{
                 .craftItemList(itemTotalCraftList)
                 .useFoodList(itemTotalUsedList)
                 .whenList(timeLists)
-                .huntedMonsterList(monsterKilledList)
+                .huntedMonsterList(monsterKilled)
                 .spentTimeList(spentTimes)
                 .build();
 
 
         return response;
+    }
+
+    @Override
+    public NoticeResponse getNotice(int page) {
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "noticeDate"));
+        Page<Notice> pages = noticeRepository.findAllByOrderByNoticeDateDesc(pageRequest);
+        long count = noticeRepository.count();
+
+        List<NoticeDto> notices = pages.getContent().stream().map(notice -> new NoticeDto().builder()
+                .noticeId(notice.getId())
+                .noticeTitle(notice.getNoticeTitle())
+                .noticeType(notice.getNoticeType())
+                .noticeDate(formatYearDate(notice.getNoticeDate()))
+                .build()).collect(Collectors.toList());
+        
+        NoticeResponse response = NoticeResponse.builder()
+                .notices(notices)
+                .noticeCnt(count)
+                .build();
+
+        return response;
+    }
+
+    @Override
+    public NoticeDetailResponse getNoticeDetail(Long id) {
+        Optional<Notice> findNotice = noticeRepository.findById(id);
+        if(!findNotice.isPresent())
+            throw new CustomException(CustomExceptionType.NOTICE_NOT_FOUND);
+
+        NoticeDetailResponse response = NoticeDetailResponse.builder()
+                .noticeId(findNotice.get().getId())
+                .noticeTitle(findNotice.get().getNoticeTitle())
+                .noticeContent(findNotice.get().getNoticeContent())
+                .noticeType(findNotice.get().getNoticeType())
+                .noticeDate(formatYearDate(findNotice.get().getNoticeDate()))
+                .build();
+
+        return response;
+    }
+
+    public String formatYearDate(LocalDateTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy.MM.dd");
+        return time.format(formatter);
     }
 
     public String formatDate(LocalDateTime time){

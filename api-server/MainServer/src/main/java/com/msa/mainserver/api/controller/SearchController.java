@@ -3,11 +3,8 @@ package com.msa.mainserver.api.controller;
 import java.util.List;
 
 import com.msa.mainserver.api.service.SearchService;
-import com.msa.mainserver.dto.response.FindRecordResponse;
-import com.msa.mainserver.dto.response.FindUserResponse;
-import com.msa.mainserver.dto.response.RankingResponse;
+import com.msa.mainserver.dto.response.*;
 
-import com.msa.mainserver.dto.response.StatisticsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +41,18 @@ public class SearchController {
     public ResponseEntity getStatistics(){
         StatisticsResponse statistics = searchService.getStatistics();
         return ResponseEntity.ok(statistics);
+    }
+
+    @GetMapping("/notice/{page}")
+    public ResponseEntity getNotice(@PathVariable("page") int page){
+        NoticeResponse notice = searchService.getNotice(page);
+        return ResponseEntity.ok(notice);
+    }
+
+    @GetMapping("/notice/detail/{no}")
+    public ResponseEntity getNoticeDetail(@PathVariable("no")Long no){
+        NoticeDetailResponse noticeDetail = searchService.getNoticeDetail(no);
+        return ResponseEntity.ok(noticeDetail);
     }
 
 

@@ -72,7 +72,7 @@
                         class="bg_white d-flex flex-column align-items-center justify-content-center back_ibory"
                     >
                         <div class="text_bold">
-                            처치힌 일반 몬스터 &nbsp;
+                            처치한 일반 몬스터 &nbsp;
                             <span style="color: #bdbdbd">{{ player.normalKill }}</span>
                         </div>
                         <div class="text_bold">

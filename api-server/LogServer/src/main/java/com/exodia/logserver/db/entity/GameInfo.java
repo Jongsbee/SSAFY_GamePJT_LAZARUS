@@ -30,5 +30,5 @@ public class GameInfo {
 	private LocalDateTime endTime;
 	@Enumerated(EnumType.STRING)
 	private GameStatus gameStatus;
-	private ArrayList<Long> users;
+	private Long users;
 }

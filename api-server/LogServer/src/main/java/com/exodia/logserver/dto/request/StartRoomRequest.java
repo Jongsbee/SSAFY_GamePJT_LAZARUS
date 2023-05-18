@@ -11,6 +11,6 @@ import lombok.Setter;
 public class StartRoomRequest {
 
 	private String gameId;
-	private List<Long> users;
+	private Long users;
 
 }

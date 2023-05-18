@@ -11,19 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.exodia.schedulerserver.db.entity.GameInfo;
 import com.exodia.schedulerserver.db.entity.InGameClearLog;
 import com.exodia.schedulerserver.db.entity.InGameCraftLog;
+import com.exodia.schedulerserver.db.entity.InGameEatLog;
 import com.exodia.schedulerserver.db.entity.InGameHuntLog;
 import com.exodia.schedulerserver.db.entity.InGameUseLog;
 import com.exodia.schedulerserver.db.entity.ItemStatistic;
+import com.exodia.schedulerserver.db.entity.MonsterStatistics;
 import com.exodia.schedulerserver.db.entity.User;
 import com.exodia.schedulerserver.db.entity.UserActivity;
 import com.exodia.schedulerserver.db.entity.GamePlayRecord;
 import com.exodia.schedulerserver.db.repository.GameInfoRepository;
 import com.exodia.schedulerserver.db.repository.InGameClearLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameCraftLogRepository;
+import com.exodia.schedulerserver.db.repository.InGameEatLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameHuntLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameQuestLogRepository;
 import com.exodia.schedulerserver.db.repository.InGameUseLogRepository;
 import com.exodia.schedulerserver.db.repository.ItemStatisticRepository;
+import com.exodia.schedulerserver.db.repository.MonsterStatisticsRepository;
 import com.exodia.schedulerserver.db.repository.UserActivityRepository;
 import com.exodia.schedulerserver.db.repository.UserRecordRepository;
 import com.exodia.schedulerserver.db.repository.UserRepository;
@@ -37,6 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Slf4j
 public class TestController {
+	private final InGameEatLogRepository inGameEatLogRepository;
 
 	private final GameInfoRepository gameInfoRepository;
 	private final InGameClearLogRepository inGameClearLogRepository;
@@ -48,11 +53,11 @@ public class TestController {
 	private final InGameQuestLogRepository inGameQuestLogRepository;
 	private final InGameUseLogRepository inGameUseLogRepository;
 	private final ItemStatisticRepository itemStatisticRepository;
+	private final MonsterStatisticsRepository monsterStatisticsRepository;
 	@GetMapping("test")
 	public void test(){
-		LocalDateTime yesterday = LocalDateTime.now();
-		LocalDateTime start = yesterday.toLocalDate().atStartOfDay();
-		LocalDateTime end = start.plusDays(1);
+		LocalDateTime start = LocalDateTime.now().minusHours(1);
+		LocalDateTime end = LocalDateTime.now();
 		log.info(start+"");
 		log.info(end+"");
 		List<GameInfo> findGames = gameInfoRepository.findByEndTimeBetween(start, end);
@@ -127,7 +132,20 @@ public class TestController {
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(ul.getItemId());
 				itemStatistic.get().increaseTotalUse();
 			}
-			ingameE
+
+			List<InGameEatLog> eatLogs = inGameEatLogRepository.findInGameEatLogsByGameId(gi.getId());
+			for(InGameEatLog el : eatLogs){
+				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(el.getItemId());
+				itemStatistic.get().increaseTotalUse();
+			}
+
+			List<InGameHuntLog>huntLogs = inGameHuntLogRepository.findInGameHuntLogsByGameId(gi.getId());
+			for(InGameHuntLog hl : huntLogs){
+				Optional<MonsterStatistics> monsterStatistics = monsterStatisticsRepository.findById(hl.getCreatureId());
+				monsterStatistics.get().increaseKilledCnt();
+			}
+
+
 
 		}
 

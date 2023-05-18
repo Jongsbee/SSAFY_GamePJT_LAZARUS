@@ -10,4 +10,5 @@ import com.exodia.schedulerserver.db.entity.InGameHuntLog;
 
 public interface InGameHuntLogRepository extends MongoRepository<InGameHuntLog, BigInteger> {
 	List<InGameHuntLog> findByUserIdAndGameId(Long userId, String gameId);
+	List<InGameHuntLog> findInGameHuntLogsByGameId(String gameId);
 }

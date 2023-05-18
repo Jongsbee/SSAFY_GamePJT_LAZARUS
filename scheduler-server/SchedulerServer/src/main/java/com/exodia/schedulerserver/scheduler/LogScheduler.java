@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.exodia.schedulerserver.db.entity.InGameEatLog;
+import com.exodia.schedulerserver.db.entity.MonsterStatistics;
 import com.exodia.schedulerserver.db.repository.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -39,8 +40,9 @@ public class  LogScheduler {
 	private final InGameUseLogRepository inGameUseLogRepository;
 	private final ItemStatisticRepository itemStatisticRepository;
 	private final InGameEatLogRepository inGameEatLogRepository;
+	private final MonsterStatisticsRepository monsterStatisticsRepository;
 
-	@Scheduled(fixedRate = 3600000)
+	@Scheduled(cron = "0 0 * * * *")
 	public void InsertDataByLog(){
 
 		LocalDateTime start = LocalDateTime.now().minusHours(1);
@@ -125,6 +127,12 @@ public class  LogScheduler {
 			for(InGameEatLog el : eatLogs){
 				Optional<ItemStatistic> itemStatistic = itemStatisticRepository.findById(el.getItemId());
 				itemStatistic.get().increaseTotalUse();
+			}
+
+			List<InGameHuntLog>huntLogs = inGameHuntLogRepository.findInGameHuntLogsByGameId(gi.getId());
+			for(InGameHuntLog hl : huntLogs){
+				Optional<MonsterStatistics> monsterStatistics = monsterStatisticsRepository.findById(hl.getCreatureId());
+				monsterStatistics.get().increaseKilledCnt();
 			}
 
 		}

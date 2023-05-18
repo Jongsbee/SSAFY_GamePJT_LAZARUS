@@ -51,6 +51,7 @@ export default {
         return {
             craftItemData: [],
             usedItemData: [],
+            huntMonsterData: [],
             whenLabelData: [],
             spentTimeList: [],
         };
@@ -64,6 +65,7 @@ export default {
                 this.usedItemData = res.data.useFoodList;
                 this.whenLabelData = res.data.whenList;
                 this.spentTimeList = res.data.spentTimeList;
+                this.huntMonsterData = res.data.huntedMonsterList;
 
                 this.renderCraftChart();
                 this.renderEatChart();
@@ -207,7 +209,7 @@ export default {
                     ],
                     datasets: [
                         {
-                            data: [10, 20, 30, 10, 15, 30, 11, 28, 4, 2, 12, 8, 3],
+                            data: this.huntMonsterData,
                             backgroundColor: [
                                 "#FA5858",
                                 "#F3E2A9",

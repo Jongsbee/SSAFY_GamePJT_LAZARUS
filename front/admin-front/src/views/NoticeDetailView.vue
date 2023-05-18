@@ -1,15 +1,6 @@
 <template>
     <div class="d-flex flex-column align-items-center ranking_back">
         <div class="main d-flex flex-column align-items-center justify-content-start">
-            <div>
-                <img
-                    v-bind="mainProps"
-                    src="../assets/LAZARUS_logo_horizontal.png"
-                    alt="Responsive image"
-                    style="display: block"
-                />
-            </div>
-
             <b-container
                 class="d-flex flex-column align-items-center justify-content-center container_style"
             >
@@ -19,15 +10,10 @@
                     >
                         <div class="ranking_title d-flex align-items-end">
                             <div class="mr-auto">
-                                <span class="ranking_title_font"> 패치노트 </span>
+                                <span class="ranking_title_font"> 업데이트 </span>
                             </div>
                         </div>
-                        <div
-                            v-for="(notice, index) in notice"
-                            :key="index"
-                            class="ranking_body d-flex align-items-center"
-                            @click="moveDetail(index)"
-                        >
+                        <div class="ranking_body d-flex align-items-center">
                             <div
                                 class="mr-5 notice-type d-flex align-items-center justify-content-center"
                             >
@@ -42,15 +28,8 @@
                                 <span> {{ notice.noticeDate }} </span>
                             </div>
                         </div>
-                        <div class="page-bar d-flex align-items-center justify-content-center mt-5">
-                            <b-pagination
-                                class="b-pagination page-link:focus"
-                                pills
-                                v-model="currentPage"
-                                :total-rows="totalCnt"
-                                :per-page="itemsPerPage"
-                                aria-controls="my-table"
-                            ></b-pagination>
+                        <div class="mt-5 detail-content" style="white-space: pre-line">
+                            {{ notice.noticeContent }}
                         </div>
                     </b-col>
                 </b-row>
@@ -65,69 +44,29 @@ import axios from "axios";
 export default {
     data() {
         return {
-            mainProps: {
-                width: 720,
-                height: 200,
-                class: "my-5",
-            },
-            currentPage: 1,
-            itemsPerPage: 10,
-            totalCnt: 1,
-            notice: [],
+            notice: null,
         };
     },
     mounted() {
+        let noticeId = this.$route.query.no;
+
         axios
-            .get(process.env.VUE_APP_SERVER_URL + "/search/notice/0")
+            .get(process.env.VUE_APP_SERVER_URL + "/search/notice/detail/" + noticeId)
             .then((res) => {
                 console.log(res.data);
-                this.notice = res.data.notices;
-                this.totalCnt = res.data.noticeCnt;
+                this.notice = res.data;
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                console.log("페이지가 존재하지 않습니다");
+                this.$router.push({ name: "patch" });
             });
-    },
-    watch: {
-        currentPage(newVal, oldVal) {
-            console.log(oldVal);
-            axios
-                .get(process.env.VUE_APP_SERVER_URL + "/search/notice/" + newVal)
-                .then((res) => {
-                    console.log(res.data);
-                    this.notice = res.data.notices;
-                    this.totalCnt = res.data.noticeCnt;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-    },
-    methods: {
-        moveDetail(cnt) {
-            console.log(cnt);
-            let param = this.notice[cnt].noticeId;
-            this.$router.push({ name: "detail", query: { no: param } });
-        },
     },
 };
 </script>
 
 <style scoped>
-::v-deep .b-pagination .page-link {
-    background-color: #bdbdbd !important;
-    color: white !important;
-    border: none !important;
-}
-
-::v-deep .b-pagination .active .page-link {
-    background-color: #bdbdbd !important;
-    color: white !important;
-    border: 1px solid border !important;
-}
-
-.page-bar {
-    width: 100%;
+.detail-content {
+    font-size: 1.5em;
 }
 .notice-type {
     border-radius: 30px;
@@ -173,7 +112,6 @@ export default {
     width: 100%;
     height: 10%;
     border-bottom: 2px solid #e6e6e6;
-    cursor: pointer;
 }
 .ranking_title_font {
     font-size: 3em;

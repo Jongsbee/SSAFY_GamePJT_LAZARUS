@@ -6,6 +6,7 @@ import Statistics from "@/views/StatisticsView.vue";
 import Ranking from "@/views/RankingView.vue";
 import Patch from "@/views/PatchNote.vue";
 import DownLoad from "@/views/DownLoadView.vue";
+import detail from "@/views/NoticeDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -40,11 +41,16 @@ const routes = [
         name: "download",
         component: DownLoad,
     },
+    {
+        path: "/patch/detail",
+        name: "detail",
+        component: detail,
+    },
 ];
 
 const router = new VueRouter({
     routes,
-    mode: "history",
+    //mode: "history",
 });
 
 export default router;

@@ -62,6 +62,6 @@ export default {
     color: white;
 }
 .text-small {
-    font-size: 0.7em;
+    font-size: 1em;
 }
 </style>

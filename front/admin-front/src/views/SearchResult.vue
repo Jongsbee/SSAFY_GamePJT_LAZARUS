@@ -1,7 +1,7 @@
 <template>
     <div
-        class="d-flex flex-column align-items-center justify-content-center"
-        style="background-color: #f8f8f8"
+        class="d-flex flex-column align-items-center justify-content-start"
+        style="background-color: #f8f8f8; height: 100vh"
     >
         <div class="main mt-3">
             <b-input-group variant="outline-primary">
@@ -241,16 +241,19 @@ export default {
                     this.player.quest = userData.totalQuestCompleted;
                     this.player.item = userData.totalItemCrafted;
                     this.player.totalGame = this.player.die + this.player.doEscape;
-                    this.player.escapePercentage = (
-                        (this.player.doEscape / this.player.totalGame) *
-                        100
-                    ).toFixed(0);
+                    if (this.player.die + this.player.doEscape === 0) {
+                        this.player.escapePercentage = 0;
+                    } else {
+                        this.player.escapePercentage = (
+                            (this.player.doEscape / this.player.totalGame) *
+                            100
+                        ).toFixed(0);
+                    }
                     this.getShortestTime(userData.shortestEscapeTime);
                     this.getLogestTime(userData.longestSurvivalTime);
                     this.getTotalPlayTime(userData.totalPlayTime);
                 })
                 .catch(() => {
-                    alert("존재하지 않는 사용자입니다.");
                     //this.$router.push({ name: "home" });
                 });
             this.findUserRecord();
@@ -266,7 +269,11 @@ export default {
             } else {
                 shortTime = hours + "시간" + minutes + "분" + remainingSeconds + "초";
             }
-            this.player.shortestEscape = shortTime;
+            if (seconds === null) {
+                this.player.shortestEscape = "정보가 존재하지 않습니다";
+            } else {
+                this.player.shortestEscape = shortTime;
+            }
         },
         getLogestTime(seconds) {
             const hours = Math.floor(seconds / 3600);
@@ -279,7 +286,12 @@ export default {
             } else {
                 longTime = hours + "시간" + minutes + "분" + remainingSeconds + "초";
             }
-            this.player.longestSurvival = longTime;
+
+            if (seconds === null) {
+                this.player.longestSurvival = "정보가 존재하지 않습니다";
+            } else {
+                this.player.longestSurvival = longTime;
+            }
         },
         getTotalPlayTime(seconds) {
             const hours = Math.floor(seconds / 3600);

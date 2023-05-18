@@ -222,7 +222,6 @@ export default {
 }
 .title_font {
     font-size: 5em;
-    font-weight: bold;
     /*
     background: linear-gradient(to bottom, #f6cece, #d358f7);
     -webkit-background-clip: text;
@@ -259,18 +258,15 @@ export default {
 }
 .ranking_body_font {
     font-size: 1.5em;
-    font-weight: bold;
     margin-left: 15px;
 }
 .ranking_title_font {
     font-size: 2em;
-    font-weight: bold;
     color: #04b486;
 }
 .time_font {
     color: #bdbdbd;
     font-size: 1.5em;
-    font-weight: bold;
     margin-right: 15px;
 }
 </style>

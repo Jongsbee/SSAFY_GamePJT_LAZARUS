@@ -10,11 +10,16 @@
             <div class="col-md-12">
                 <b-input-group variant="outline-primary">
                     <b-input-group-prepend>
-                        <b-input-group-text class="bold_text">닉네임</b-input-group-text>
+                        <b-input-group-text class="table_header">닉네임</b-input-group-text>
                     </b-input-group-prepend>
-                    <b-form-input v-model="nickname" @keyup.enter="search"></b-form-input>
+                    <b-form-input
+                        v-model="nickname"
+                        @keyup.enter="search"
+                        style="height: 50px"
+                        class="table_header"
+                    ></b-form-input>
                     <b-input-group-append class="input_append">
-                        <b-input-group-text class="bold_text clickable" @click="search"
+                        <b-input-group-text class="table_header clickable" @click="search"
                             >검색</b-input-group-text
                         >
                     </b-input-group-append>
@@ -50,8 +55,10 @@ export default {
 </script>
 
 <style scoped>
+.table_header {
+    font-size: 1.3em;
+}
 .bold_text {
-    font-weight: bold;
     background-color: #ffffff;
 }
 

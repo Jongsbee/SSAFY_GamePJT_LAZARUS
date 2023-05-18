@@ -5,6 +5,7 @@ import SearchResultView from "@/views/SearchResult.vue";
 import Statistics from "@/views/StatisticsView.vue";
 import Ranking from "@/views/RankingView.vue";
 import Patch from "@/views/PatchNote.vue";
+import DownLoad from "@/views/DownLoadView.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
         path: "/patch",
         name: "patch",
         component: Patch,
+    },
+    {
+        path: "/download",
+        name: "download",
+        component: DownLoad,
     },
 ];
 

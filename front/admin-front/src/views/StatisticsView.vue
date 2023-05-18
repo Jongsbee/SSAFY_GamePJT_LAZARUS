@@ -340,12 +340,12 @@ export default {
 }
 .ranking_body_font {
     font-size: 1.5em;
-    font-weight: bold;
+
     margin-left: 15px;
 }
 .ranking_title_font {
     font-size: 2em;
-    font-weight: bold;
+
     color: #04b486;
 }
 </style>

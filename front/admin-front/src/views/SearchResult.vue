@@ -6,11 +6,16 @@
         <div class="main mt-3">
             <b-input-group variant="outline-primary">
                 <b-input-group-prepend>
-                    <b-input-group-text class="bold_text">닉네임</b-input-group-text>
+                    <b-input-group-text class="table_header">닉네임</b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input v-model="nickname" @keyup.enter="search"></b-form-input>
+                <b-form-input
+                    v-model="nickname"
+                    @keyup.enter="search"
+                    style="height: 50px"
+                    class="table_header"
+                ></b-form-input>
                 <b-input-group-append class="input_append">
-                    <b-input-group-text class="bold_text clickable" @click="search"
+                    <b-input-group-text class="table_header clickable" @click="search"
                         >검색</b-input-group-text
                     >
                 </b-input-group-append>
@@ -23,11 +28,16 @@
             <b-container class="player_info my-5">
                 <b-row>
                     <b-col cols="2" class="d-flex justify-content-center">
-                        <img src="../assets/yang.jpg" alt="user" width="100" height="100" />
+                        <img
+                            src="../assets/gold-bar-logo.png"
+                            alt="user"
+                            width="100"
+                            height="100"
+                        />
                     </b-col>
                     <b-col class="d-flex align-items-center" cols="7">
                         <div>
-                            <h1 class="text_bold">{{ searchParam }}</h1>
+                            <h1 class="nickname-size">{{ searchParam }}</h1>
                         </div>
                     </b-col>
 
@@ -97,7 +107,7 @@
             </b-container>
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="table_header">
                         <th>탈출여부</th>
                         <th>일반 몬스터 처치</th>
                         <th>엘리트 몬스터 처치</th>
@@ -118,13 +128,13 @@
                                     : 'linear-gradient(to bottom, #F8E0E0, #F5A9A9)',
                         }"
                     >
-                        <td class="text_bold">{{ game.result }}</td>
-                        <td class="text_bold">{{ game.normal }}</td>
-                        <td class="text_bold">{{ game.elite }}</td>
-                        <td class="text_bold">{{ game.item }}</td>
-                        <td class="text_bold">{{ game.quest }}</td>
-                        <td class="text_bold">{{ game.gameTime }}</td>
-                        <td class="text_bold">{{ game.when }} 전</td>
+                        <td class="table_header">{{ game.result }}</td>
+                        <td class="table_header">{{ game.normal }}</td>
+                        <td class="table_header">{{ game.elite }}</td>
+                        <td class="table_header">{{ game.item }}</td>
+                        <td class="table_header">{{ game.quest }}</td>
+                        <td class="table_header">{{ game.gameTime }}</td>
+                        <td class="table_header">{{ game.when }} 전</td>
                     </tr>
                 </tbody>
             </table>
@@ -314,12 +324,18 @@ export default {
 </script>
 
 <style scoped>
+.nickname-size {
+    font-size: 3em;
+}
 .table {
     margin: 0 auto;
     width: 1150px;
 }
+.table_header {
+    font-size: 1.3em;
+}
 .text_bold {
-    font-weight: bold;
+    font-size: 1.5em;
 }
 .main {
     width: 1400px; /* 화면 너비의 10% */
@@ -328,11 +344,9 @@ export default {
 }
 .text_big {
     font-size: 3em;
-    font-weight: bold;
 }
 .text_sbig {
     font-size: 2em;
-    font-weight: bold;
 }
 .bg_white {
     background-color: white;

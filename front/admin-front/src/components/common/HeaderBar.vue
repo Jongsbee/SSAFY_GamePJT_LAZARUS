@@ -67,6 +67,7 @@ export default {
 }
 .text-white {
     color: white;
+    cursor: pointer;
 }
 .text-small {
     font-size: 1.5em;

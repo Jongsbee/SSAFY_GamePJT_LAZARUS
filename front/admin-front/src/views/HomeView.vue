@@ -1,12 +1,18 @@
 <template>
-    <div class="container d-flex flex-column main">
+    <div class="container d-flex flex-column align-items-center main">
         <div class="row justify-content-center">
-            <img
-                v-bind="mainProps"
-                src="../assets/LAZARUS_logo_horizontal.png"
-                alt="Responsive image"
-                style="display: block"
-            />
+            <div>
+                <img
+                    v-bind="mainProps"
+                    src="../assets/LAZARUS_logo_horizontal.png"
+                    alt="Responsive image"
+                    style="display: block"
+                    class="mr-3"
+                />
+            </div>
+
+            <!-- <div class="title-font my-5 text-center">LAZARUS.GG</div> -->
+
             <div class="col-md-12">
                 <b-input-group variant="outline-primary">
                     <b-input-group-prepend>
@@ -55,6 +61,13 @@ export default {
 </script>
 
 <style scoped>
+.sub {
+    width: 1200px;
+}
+.title-font {
+    font-size: 10em;
+    color: #0b3b17;
+}
 .table_header {
     font-size: 1.3em;
 }

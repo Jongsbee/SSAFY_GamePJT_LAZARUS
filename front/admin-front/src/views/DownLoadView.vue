@@ -33,14 +33,14 @@
                         </div>
                         <table class="table-size mt-4">
                             <th class="d-flex align-items-center justify-content-center th-style">
-                                <td class="th-column d-flex align-items-center justify-content-center th-br"> 권장 시스템 사양 </td>
-                                <td class="th-column d-flex align-items-center justify-content-center th-br"> 최소 사양 </td>
+                                <td class="th-column d-flex align-items-center justify-content-center"> 권장 시스템 사양 </td>
+                                <td class="th-column d-flex align-items-center justify-content-center"> 최소 사양 </td>
                                 <td class="th-column d-flex align-items-center justify-content-center"> 권장 사양</td>
                             </th>
                             <tbody class="d-flex align-items-center justify-content-center tbody-style">
-                                <td class="th-column d-flex align-items-center justify-content-center tbody-column"> PC , Laptop</td>
-                                <td class="th-column d-flex align-items-center justify-content-center tbody-column"> 싸트북</td>
-                                <td class="th-column d-flex align-items-center justify-content-center tbody-top"> 싸트북 보다 좋은거</td>
+                                <td class="th-column d-flex align-items-center justify-content-center th-br"> PC , Laptop</td>
+                                <td class="th-column d-flex align-items-center justify-content-center th-br"> 싸트북</td>
+                                <td class="th-column d-flex align-items-center justify-content-center"> 싸트북 보다 좋은거</td>
                             </tbody>
                             <tbody class="d-flex align-items-center justify-content-center tbody-style tbody-bottom">
                                 <td class="th-column d-flex align-items-center justify-content-center tbody-column"> OS </td>
@@ -84,24 +84,24 @@ export default {
 
 <style scoped>
 .tbody-bottom{
-    border-bottom: 2px solid #58FA82;
+    border-bottom: 2px solid #A9F5A9;
 }
 .tbody-style{
     background-color : white;
 }
 .tbody-column{
-    border-right: 2px solid #58FA82;
-    border-top: 2px solid #58FA82;
+    border-right: 2px solid #A9F5A9;
+    border-top: 2px solid #A9F5A9;
 }
 .tbody-top{
-    border-top: 2px solid #58FA82; 
+    border-top: 2px solid #A9F5A9; 
 }
 
 .th-style{
     background-color : #E0F8E6; 
 }
 .th-br{
-    border-right: 2px solid #58FA82;
+    border-right: 2px solid #A9F5A9;
 }
 .th-column{
     width: 33%;

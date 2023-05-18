@@ -7,6 +7,7 @@ import com.msa.mainserver.db.entity.User;
 import com.msa.mainserver.db.entity.UserActivity;
 import com.msa.mainserver.db.repository.GamePlayRecordRepository;
 import com.msa.mainserver.db.repository.ItemStatisticRepository;
+import com.msa.mainserver.db.repository.MonsterStatisticsRepository;
 import com.msa.mainserver.db.repository.UserActivityRepository;
 import com.msa.mainserver.db.repository.UserRepository;
 import com.msa.mainserver.dto.CraftRankDto;
@@ -43,11 +44,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SearchServiceImpl implements SearchService{
-    private final ItemStatisticRepository itemStatisticRepository;
 
+    private final ItemStatisticRepository itemStatisticRepository;
     private final UserRepository userRepository;
     private final UserActivityRepository userActivityRepository;
     private final GamePlayRecordRepository gamePlayRecordRepository;
+    private final MonsterStatisticsRepository monsterStatisticsRepository;
     private final Long[] craftIds = {60L, 61L, 100L, 101L, 110L, 111L, 120L, 121L};
     private final Long[] usedIds = {30L, 31L, 32L, 40L, 41L, 42L, 200L, 201L, 202L, 210L, 211L, 212L};
     private List<Long> craftItemIdList;
@@ -169,8 +171,9 @@ public class SearchServiceImpl implements SearchService{
     public StatisticsResponse getStatistics() {
         Pageable pageable = PageRequest.of(0, 10);
 
-        List<Integer> itemTotalCraftList = itemStatisticRepository.findItemTotalCraftByIdIn(craftItemIdList);
-        List<Integer> itemTotalUsedList = itemStatisticRepository.findItemTotalUsedByIdIn(usedItemIdList);
+        List<Integer> itemTotalCraftList = itemStatisticRepository.findItemTotalCraft(craftItemIdList);
+        List<Integer> itemTotalUsedList = itemStatisticRepository.findItemTotalUsed(usedItemIdList);
+        List<Integer> monsterKilledList = monsterStatisticsRepository.findMonsterKilled();
 
         Page<GameplayRecord> recentInfoLists = gamePlayRecordRepository.findRecentSpentTimeAndGameEndTime(pageable);
 
@@ -186,7 +189,7 @@ public class SearchServiceImpl implements SearchService{
                 .craftItemList(itemTotalCraftList)
                 .useFoodList(itemTotalUsedList)
                 .whenList(timeLists)
-                .huntedMonsterList(null)
+                .huntedMonsterList(monsterKilledList)
                 .spentTimeList(spentTimes)
                 .build();
 
@@ -195,7 +198,7 @@ public class SearchServiceImpl implements SearchService{
     }
 
     public String formatDate(LocalDateTime time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd.HH:mm");
         return time.format(formatter);
     }
 

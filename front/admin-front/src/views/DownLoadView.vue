@@ -74,7 +74,7 @@ export default {
     methods: {
         openDownload() {
             window.open(
-                "https://drive.google.com/file/d/1oTWP19Do0pv8AlTNmD99BYWQ2X_MycDh/view",
+                "https://drive.google.com/file/d/1PPsXQA92cjC362_eRqV1kV35tPUxEcfU/view",
                 "_blank"
             );
         },

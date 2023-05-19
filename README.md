@@ -150,6 +150,8 @@ schedulerserver
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239277788-206fd9c8-bdf0-421e-945e-c997c47da3e9.png" width="600"/>
 
+### [⚙ GitOps 레포지토리](https://lab.ssafy.com/dope2514/s08p31a106-gitops)
+
 <br/>
 
 ## 📜 기능 명세서

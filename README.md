@@ -1,7 +1,8 @@
 # LAZARUS
 
-![image](https://user-images.githubusercontent.com/104764340/233580330-47909bab-0033-4f1a-88ed-ac8483d88130.png)
-
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239406192-5c855ba7-138d-42c0-b1cb-fea8a6abbf3b.png" width="400"/>
+<br/>
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239405352-64a72ea2-16e4-4fef-a2e0-8bdaca8a6bf5.png" width="700"/>
 
 <br/>
 
@@ -21,7 +22,12 @@
 <br/>
 
 ### ✔ 주요 기능
-
+- 동물 및 몬스터 AI
+- 플레이어 커스터마이징, 애니메이션
+- 아이템 조합
+- 오브젝트 상호작용
+- 게임플레이 로그 기록
+- 매 정각마다 로그기록을 스케줄링하여 통계
 
 
 <br/>
@@ -150,7 +156,7 @@ schedulerserver
 
 <details>
     <summary>Swagger-ui</summary>
-    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239291358-412b440a-3e58-45dd-be96-371cbca71cb1.jpeg" width="600"/>
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239405062-d10c40a1-f332-452a-a064-f6a81f073592.jpeg" width="600"/>
 
 </details>
 
@@ -255,6 +261,20 @@ schedulerserver
 
 ## 🎨 기능 상세 설명
 
+### 🎮 게임
 
+### 📊 홈페이지
+- 메인페이지
+![메인](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407162-c221236c-fe5c-4f97-ad92-9388f312d3a6.png)
+- 전전검색
+![전적검색](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407708-680842d9-6e64-4c82-bad5-39cf8694d7ed.png)
+- 통계페이지
+![통계](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407161-0a3362cb-6855-40ad-9c5f-fab8e4ae7369.png)
+- 랭킹페이지
+![랭킹](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239408169-ef684f0b-519e-405a-9017-c65de47e458c.png)
+- 패치노트
+![패치노트](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407165-f3478ac1-e220-4bb2-8a65-ed198d3614cb.png)
+- 다운로드 페이지
+![다운로드](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239408165-50a669e5-be3c-4237-b4b6-40c4355076e7.png)
 ## 📚 문서
 - [📢 Notion](https://past-ring-03e.notion.site/Team-781bd1c81d78443fae3349826c4c3ce2)

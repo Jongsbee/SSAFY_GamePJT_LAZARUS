@@ -271,7 +271,7 @@ schedulerserver
 
 <br/>
 
-### 🤝 컨벤션
+## 🤝 컨벤션
 
 <details>
     <summary><b>git 컨벤션</b></summary>
@@ -378,6 +378,14 @@ schedulerserver
 ![패치노트](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407165-f3478ac1-e220-4bb2-8a65-ed198d3614cb.png)
 - 다운로드 페이지
 ![다운로드](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239408165-50a669e5-be3c-4237-b4b6-40c4355076e7.png)
+
+## ⚙ 배포와 모니터링
+- Argo CD 대시보드
+![argo](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/240523630-8fb3bfe9-1d44-41d7-8d58-eb8892ec7c9f.png)
+  - Argo CD의 Rolling 무중단 배포
+  ![무중단배포](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/240523612-4cafa5f4-cb07-4b71-9048-4f2106782def.gif)
+- Grafana 대시보드
+![grafana](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/240523627-f977e396-ee46-47ca-b2bc-545a3dc07dfb.png)
 
 ## 📚 문서
 - [📢 Notion](https://past-ring-03e.notion.site/Team-781bd1c81d78443fae3349826c4c3ce2)

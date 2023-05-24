@@ -26,6 +26,7 @@
 - 플레이어 커스터마이징, 애니메이션
 - 아이템 조합
 - 오브젝트 상호작용
+- 게임 이벤트
 - 게임플레이 로그 기록
 - 매 정각마다 로그기록을 스케줄링하여 통계
 
@@ -49,6 +50,48 @@
 
 <br/>
 
+## 📌 기술 스택
+
+### Frontend
+<img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=unity&logoColor=black"/></a>&nbsp;
+<img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white"/></a>&nbsp;
+
+### BackEnd
+<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/></a>&nbsp;
+
+### DevOps
+<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Argo-EF7B4D?style=for-the-badge&logo=argo&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white"/></a>&nbsp;
+
+### Tools
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/IntelliJIDEA-000000?style=for-the-badge&logo=IntelliJIDEA&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Visual%20Studio-5C2D91?style=for-the-badge&logo=visualstudio&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/></a>&nbsp;
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"/></a>&nbsp;
+
+<br/>
+
 ## ⚙ 개발 환경
 
 🔧 **Backend**
@@ -57,9 +100,10 @@
 - Open JDK 11
 - Spring Boot 2.7.11
 - Spring Data JPA
+- Gradle 7.6.1
 
 🔧 **Frontend**
-- Unity 2021.3.22
+- Unity 2021.3.22f
 - Vue.js 2.7.14
 
 🔧 **CI/CD**
@@ -81,7 +125,63 @@
 
 ## 🗂 프로젝트 폴더 구조
 
-- Frontend
+- Frontend - Unity
+```text
+.
+├── Assets
+│   ├── 0_Scenes
+│   ├── 1_Prefabs
+│   ├── 2_Scripts
+│   ├── 2d,3d game basic essential FX
+│   ├── 3_Sounds
+│   ├── 4_PackedAssets
+│   ├── 5_UnpackedPackages
+│   ├── 6_Rendering
+│   ├── 7_ETCS
+│   ├── 8_Animations
+│   ├── ARPG Effects
+│   ├── Assets
+│   ├── KriptoFX
+│   ├── Resources
+│   ├── RifleAnimsetPro
+│   ├── Settings
+│   ├── TextMesh Pro
+│   └── _TerrainAutoUpgrade
+├── Library
+│   ├── APIUpdater
+│   ├── Artifacts
+│   ├── Bee
+│   ├── BurstCache
+│   ├── PackageCache
+│   ├── PackageManager
+│   ├── ScriptAssemblies
+│   ├── Search
+│   ├── ShaderCache
+│   ├── StateCache
+│   └── TempArtifacts
+├── Logs
+├── Packages
+├── ProjectSettings
+├── TooManyCrosshairs
+│   ├── 128px
+│   ├── 128pxUpsized
+│   ├── 2048px
+│   ├── 2160p
+│   ├── 256px
+│   ├── 512px
+│   ├── 64px
+│   ├── Cursors
+│   ├── HELLSLAYER Crosshairs
+│   ├── HorizonCrosshairs
+│   ├── Unknown's Crosshairs
+│   └── _Demo
+├── UserSettings
+│   └── Layouts
+└── obj
+    └── Debug
+```
+
+- Frontend - Web
 ```text
 admin-front
 ├── public
@@ -218,16 +318,16 @@ schedulerserver
 
 ```
 ⭐main
-  - dev
-    - dev-front
-      - feature-front/기능명
-    - dev-back
-      - api-server/기능명
-      - scheduler-server/기능명
-    - fix : 문제가 생긴 브랜치에서 분기
-      - fix-front/기능명
-      - fix-back/기능명
-  - docs/문서타입[ex) README, exec]
+  ├── dev
+  │   ├── dev-front
+  │   │   └── feature-front/기능명
+  │   ├── dev-back
+  │   │   ├── api-server/기능명
+  │   │   └── scheduler-server/기능명
+  │   └── fix : 문제가 생긴 브랜치에서 분기
+  │       ├── fix-front/기능명
+  │       └── fix-back/기능명
+  └── docs/문서타입[ex) README, exec]
 ```
 
 </details>
@@ -268,7 +368,7 @@ schedulerserver
 ### 📊 홈페이지
 - 메인페이지
 ![메인](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407162-c221236c-fe5c-4f97-ad92-9388f312d3a6.png)
-- 전전검색
+- 전적검색
 ![전적검색](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407708-680842d9-6e64-4c82-bad5-39cf8694d7ed.png)
 - 통계페이지
 ![통계](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407161-0a3362cb-6855-40ad-9c5f-fab8e4ae7369.png)
@@ -278,5 +378,7 @@ schedulerserver
 ![패치노트](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239407165-f3478ac1-e220-4bb2-8a65-ed198d3614cb.png)
 - 다운로드 페이지
 ![다운로드](https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239408165-50a669e5-be3c-4237-b4b6-40c4355076e7.png)
+
 ## 📚 문서
 - [📢 Notion](https://past-ring-03e.notion.site/Team-781bd1c81d78443fae3349826c4c3ce2)
+- [🎞 PPT](https://www.canva.com/design/DAFjJSTucpA/540E-jzGSd4ONbaMawqO5w/view?utm_content=DAFjJSTucpA&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)

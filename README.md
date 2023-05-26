@@ -2,7 +2,7 @@
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239406192-5c855ba7-138d-42c0-b1cb-fea8a6abbf3b.png" width="400"/>
 <br/>
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/239405352-64a72ea2-16e4-4fef-a2e0-8bdaca8a6bf5.png" width="700"/>
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/47595515/241095759-e198c7de-154d-48e1-bf37-23225c558550.png" width="700"/>
 
 <br/>
 
@@ -26,7 +26,7 @@
 - 플레이어 커스터마이징, 애니메이션
 - 아이템 조합
 - 오브젝트 상호작용
-- 게임 이벤트
+- 다양한 게임 이벤트
 - 게임플레이 로그 기록
 - 매 정각마다 로그기록을 스케줄링하여 통계
 

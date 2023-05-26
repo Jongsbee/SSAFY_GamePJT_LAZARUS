@@ -103,7 +103,7 @@ CREATE TABLE `gameplay_record` (
   PRIMARY KEY (`record_id`),
   KEY `FK_user_TO_user_record_1` (`user_id`),
   CONSTRAINT `FK_user_TO_user_record_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,24 @@ INSERT INTO `gameplay_record` VALUES
 (18,2,'testGameId2','2023-01-15 15:00:24',5,100,40,1,1940,13),
 (19,2,'testGameId3','2022-05-15 15:01:41',16,189,52,0,2154,4),
 (21,10,'game_id_1','2023-05-18 10:06:57',2,13,21,0,314,5),
-(22,2,'testGameId3','2023-05-18 17:01:47',16,189,52,1,2154,4);
+(22,2,'testGameId3','2023-05-18 17:01:47',16,189,52,1,2154,4),
+(23,15,'a13e7ec7-4c38-4bf1-a2b1-8233dd6c2a69','2023-05-19 14:28:18',0,3,1,0,283,1),
+(24,33,'e80d1ce4-f2a1-42aa-a3e3-a4ebd0756485','2023-05-19 17:03:32',0,2,0,0,530,2),
+(25,35,'9ea4d4e2-21d0-41ac-aa83-efdd323af0c1','2023-05-19 17:04:42',0,0,0,0,321,0),
+(26,37,'179ce1f7-c832-4996-bac2-34d8c3bccea3','2023-05-19 19:08:07',0,0,0,0,99,0),
+(27,38,'38996b12-fdfc-4a6f-a985-ee3b8c009db7','2023-05-19 19:28:00',0,0,0,0,114,0),
+(28,38,'34eef73e-cead-4fab-af5b-0251a511cead','2023-05-19 19:41:25',0,0,0,0,403,0),
+(29,39,'cb6346e4-dabb-4389-a78b-adfa4acfe47a','2023-05-21 00:46:33',0,0,0,0,2453,0),
+(30,37,'0e86270a-2e26-4e18-bf36-37bdade41dfd','2023-05-22 12:38:25',0,2,0,0,235254,2),
+(31,37,'5896b281-8a36-4170-b491-be29c94e389b','2023-05-22 13:03:15',3,9,0,0,1386,6),
+(32,37,'1629c41c-68d6-4e1b-9263-9251aa3a7d47','2023-05-22 14:12:28',0,1,0,0,314,2),
+(33,37,'b8cade6b-72a6-4b38-81a7-7c8da0bf9918','2023-05-22 14:42:50',2,13,28,0,1749,2),
+(34,37,'d9a1e988-feab-4f2f-95c6-5e456ae7d8bb','2023-05-22 15:07:19',2,3,8,0,1329,3),
+(35,15,'e1380a66-6e83-46b0-ada2-860792d18fec','2023-05-22 16:42:46',0,0,2,0,96,1),
+(36,15,'fd8afdbf-5ce7-4be7-a14d-0d1e51789e93','2023-05-22 17:33:40',1,4,0,0,379,2),
+(37,37,'7b6aa4a4-eb40-49b3-bbe1-4de1feccf7d6','2023-05-23 09:23:01',8,23,35,0,65399,6),
+(38,15,'64a15baf-fc11-441f-bedc-1c5e9a877b68','2023-05-24 12:47:08',1,5,5,0,619,4),
+(39,50,'347accb5-924b-4bd2-aa82-d56719b87695','2023-05-24 17:52:19',1,3,0,0,203,0);
 /*!40000 ALTER TABLE `gameplay_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,15 +226,15 @@ CREATE TABLE `item_statistics` (
 LOCK TABLES `item_statistics` WRITE;
 /*!40000 ALTER TABLE `item_statistics` DISABLE KEYS */;
 INSERT INTO `item_statistics` VALUES
-(1,0,0),
+(1,0,1),
 (11,0,0),
 (30,0,0),
 (31,0,0),
 (32,0,0),
-(40,2,0),
-(41,1,0),
-(42,0,0),
-(60,8,0),
+(40,3,0),
+(41,7,0),
+(42,13,0),
+(60,15,7),
 (61,8,22),
 (100,0,2),
 (101,0,5),
@@ -225,10 +242,10 @@ INSERT INTO `item_statistics` VALUES
 (111,0,6),
 (120,0,0),
 (121,0,10),
-(200,0,0),
-(201,8,0),
-(202,0,0),
-(210,0,0),
+(200,19,19),
+(201,22,19),
+(202,30,33),
+(210,3,0),
 (211,0,0),
 (212,0,0);
 /*!40000 ALTER TABLE `item_statistics` ENABLE KEYS */;
@@ -325,15 +342,15 @@ LOCK TABLES `monster_statistics` WRITE;
 INSERT INTO `monster_statistics` VALUES
 (1,6),
 (2,0),
-(3,6),
-(4,0),
-(5,14),
-(6,0),
-(7,0),
-(8,0),
-(9,4),
-(10,0),
-(11,0),
+(3,24),
+(4,6),
+(5,26),
+(6,14),
+(7,3),
+(8,18),
+(9,13),
+(10,3),
+(11,3),
 (12,0),
 (13,0);
 /*!40000 ALTER TABLE `monster_statistics` ENABLE KEYS */;
@@ -363,7 +380,8 @@ CREATE TABLE `notice` (
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
 INSERT INTO `notice` VALUES
-(1,'0.5.0 LAZARUS 오픈베타 실시합니다','공지','■ LAZARUS 오픈베타 시작!\n\n■ 판타지풍 생존게임 LAZARUS 입니다!\n\n■ 즐겁게 플레이해주세요!','2023-05-19 00:43:17');
+(1,'v0.5.0 LAZARUS 오픈베타 실시합니다','공지','■ LAZARUS 오픈베타 시작!\n\n■ 판타지풍 생존게임 LAZARUS 입니다!\n\n■ 즐겁게 플레이해주세요!','2023-05-19 00:43:17'),
+(2,'v2.5.0 LAZARUS 업데이트 내역','공지','■ 로그인화면에서 tab키를 사용할 수 있게 해두었습니다.\n\n■ 인게임 화면에 레이더를 추가하였습니다.\n    □동물 : 초록색\n    □좀비몬스터 : 빨간색\n    □일지 : 일지아이콘\n    □건물 : 파란색 삼각형','2023-05-24 04:49:55');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,7 +430,7 @@ CREATE TABLE `user` (
   `user_active` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UC_USER` (`email`,`nickname`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,14 +440,34 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
-(1,'test@ruu.kr','$2a$10$0Ec4pIueIIPeaf6CPyftS.aKbTsOBPhVmbXOYz1IUy03MPFcvR35i','tester','2023-05-11 10:53:22',1),
+(1,'test@gmail.com','$2a$10$0Ec4pIueIIPeaf6CPyftS.aKbTsOBPhVmbXOYz1IUy03MPFcvR35i','tester','2023-05-11 10:53:22',1),
 (2,'devjunmo@ruu.kr','$2a$10$8AYw3VNfpuwXJcAJQl5wW.tsxcRDjiQDBC788rMSTp/jrxJpDFQeK','포톤갓정해석','2023-05-12 14:15:28',1),
-(8,'gregori@ruu.kr','$2a$10$Iz76CosdwhTPads9fOkREOZ0hr4zfDmki8evS2E5qPEhnUbdbkk.6','성스러운그레고리','2023-05-16 03:55:57',1),
+(8,'0001','$2a$10$Iz76CosdwhTPads9fOkREOZ0hr4zfDmki8evS2E5qPEhnUbdbkk.6','성스러운그레고리','2023-05-16 03:55:57',1),
 (9,'junmo@ruu.kr','$2a$10$tcZRY.jzwm/XUJ/b/wL6eu99BCRuWC8hPEsljKFjfmwDn62pHRpcC','옹심이아빠','2023-05-16 12:21:47',1),
 (10,'upjunmo@ruu.kr','$2a$10$RPRZPAMqAAK2IhZPsROTMOIhDfAKejLPx2GIKzAdYsGreWzpg1um6','넝담곰','2023-05-16 12:28:40',1),
 (12,'leftjunmo@ruu.kr','$2a$10$.Ibi.4YMOh.0jvSgKc0OGOFcquSIro39F.K3vWYN0tBK2k4CfOKn6','좌준모','2023-05-16 12:31:55',0),
 (13,'rightjunmo@ruu.kr','$2a$10$kwhao9MRtpbJUxzUQKBHA.TmGotdxnh7nRTrUZ.QRKcyFqb4QaUM2','우준모','2023-05-16 12:48:02',0),
-(27,'najunmo@ruu.kr','$2a$10$ebvCFWDm15WshE6nlGHfEemBr9SwfCFSvaFba2n5cDN/h6HVdUC2y','나준모','2023-05-19 08:37:31',1);
+(15,'0002','$2a$10$enHscp.4Ko5BX0ToOgKxEumTHbZh.GYgnwpHO4gt52kHJNJLG09Qa','종스비','2023-05-18 16:35:11',1),
+(16,'0003','$2a$10$guKIvCkJUhXmKHEqAY7O0uvdxSV20knw9.wa8oslcjZtvSrtW8se6','이도옹','2023-05-19 02:10:01',0),
+(27,'najunmo@ruu.kr','$2a$10$ebvCFWDm15WshE6nlGHfEemBr9SwfCFSvaFba2n5cDN/h6HVdUC2y','나준모','2023-05-19 08:37:31',1),
+(28,'0004','$2a$10$KRszmSix.8bXsF0QDkJgUusIb29dRXAvcfJp2MwUkvWS1kFRoQc96','장푸니','2023-05-19 16:20:51',0),
+(29,'0005','$2a$10$HMIO1fkUo7YeGyGi.RUs8uuooK2mEvc8Ee6miu44sGmxNjrgURzn2','Young','2023-05-19 16:22:07',0),
+(33,'0006','$2a$10$CHzWSZdmUyYIj6ntjhJ5VuKkJNH/Bt2Uej78JrR7JSwo3q8c23J6G','장푼이','2023-05-19 16:53:38',1),
+(34,'0007','$2a$10$9YPtnxN5InZJnlTjt/CeXuB7FGN0wC3c0f3rzFQAp3kU.bZKl7i0y','Gittgi','2023-05-19 16:55:21',1),
+(35,'0008','$2a$10$5Tycy7qkPjSUYBQb7xkT1.r0krnNDaBJl0ASCUbxdVKVHLn7AZDRC','위험한남자김냐옹','2023-05-19 16:57:35',1),
+(36,'asdasdasdasd@asd.com','$2a$10$si6uXz.3jOe87OapyuRPLOojXBJrIFRTEEqeb7E0BjtNM/CvGyjgu','Asdasdasd','2023-05-19 17:27:51',0),
+(37,'0009','$2a$10$jVIy1Z5Bc6mKu5TBjgdBC.z9Fw2ZapHqcpTOQ6TaJoQtdqiGo1jsC','쑤','2023-05-19 18:49:13',1),
+(38,'0010','$2a$10$Rsc9kAtKPGB9nkdYFgn/r.pZAmwzHHXxDWiveszvZ/ogO5DDnfdW2','Riri','2023-05-19 19:22:01',1),
+(39,'0011','$2a$10$c3X6ysqNP/bHp8I4Q2GhH.M5GU5v0MMqvmTp6DpV7k77IuyGwQ2O.','강컨','2023-05-21 00:00:19',1),
+(40,'0012','$2a$10$m3NeMeYucxb4gq/eUjzqP.bG/lCdH3DNOvU5v1b1yRExkI/h6pcAC','종스비비','2023-05-22 12:47:31',0),
+(41,'0013','$2a$10$4UgGtwFLTQxwp..dHF0VvOsuMNxMqOrDgxC0ut9vtnhbVK9Yrd9aK','존예존예','2023-05-22 13:29:47',1),
+(42,'asdafasf@naver.com','$2a$10$rcferjtyVlYHbwxgKGXi.ez8.iYR9Lh3ax0m1JY4XEkrnjPM8DjsG','킹갓','2023-05-23 14:38:32',0),
+(43,'asdafasf432@naver.com','$2a$10$Hje26gvpUgSbDE7LRSKwI.MY6Ka1KiKp9pppFXmKnM1nBrlDRnEXq','킹가앗','2023-05-23 14:38:58',0),
+(44,'asdq12awe@naver.com','$2a$10$/FHE.MuQwa7qpL/F5Q0FsO/zDD5ITGUCEKGQ65Kj8qlqYYZWfePXm','Zzzdasdas','2023-05-23 17:19:05',0),
+(45,'0014','$2a$10$JVrLmATD0uDYNPsTOaukbekp4lSQrz0gLoqgravQ.COOaX5nrtEya','Kinggodd','2023-05-23 17:20:18',1),
+(46,'duel@naver.com','$2a$10$zMOSh7eT4/CHW4vfZkXqw.xpWV7SfYSEdFKpXtEVJzuVhb0ma651y','듀얼마스터','2023-05-24 17:46:11',0),
+(49,'triple@naver.com','$2a$10$4UMB07jTt7esJ7wz/xAFR.RCwOsxKjFi/FcLAto4REyWD1P4fuwuC','트리플마스터','2023-05-24 17:46:58',0),
+(50,'0015','$2a$10$StobZB/PtjHzrk1JH0w.Eec5ejqj4ub9U45ehsepo.Xlm7FrnZRJm','Triple','2023-05-24 17:47:52',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -498,16 +536,34 @@ CREATE TABLE `user_activity` (
 LOCK TABLES `user_activity` WRITE;
 /*!40000 ALTER TABLE `user_activity` DISABLE KEYS */;
 INSERT INTO `user_activity` VALUES
-(1,NULL,NULL,21354,21354,3,'4',1,1,3,0,21354,13,23),
-(2,'2023-05-12 14:33:14','0:0:0:0:0:0:0:1',1910,2584,155,'22',6,28,89,13,15940,16,12),
-(8,NULL,NULL,2663,2794,42,'21',4,15,67,11,14390,1,1),
-(9,'2023-05-16 13:45:41','172.26.12.139',2184,2533,25,'3',2,14,25,5,9059,12,8),
-(10,NULL,NULL,314,314,26,'4',2,10,42,0,628,17,9),
+(1,NULL,NULL,NULL,NULL,3,'4',1,1,3,0,21354,13,23),
+(2,'2023-05-12 14:33:14','0:0:0:0:0:0:0:1',NULL,NULL,155,'22',6,28,89,13,15940,16,12),
+(8,NULL,NULL,NULL,NULL,42,'21',4,15,67,11,14390,1,1),
+(9,'2023-05-16 13:45:41','172.26.12.139',NULL,NULL,25,'3',2,14,25,5,9059,12,8),
+(10,NULL,NULL,NULL,NULL,26,'4',2,10,42,0,628,17,9),
 (12,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
 (13,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
-(15,'2023-05-18 23:10:29','172.26.12.139',NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(15,'2023-05-25 13:40:09','172.26.12.139',NULL,NULL,12,'2',4,8,8,0,283,2,9),
 (16,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
-(27,'2023-05-19 08:39:48','172.26.12.139',NULL,NULL,0,'0',0,0,0,0,0,0,0);
+(27,'2023-05-19 08:39:48','172.26.12.139',NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(28,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(29,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(33,'2023-05-19 17:05:19','172.26.12.139',NULL,NULL,2,'0',1,2,0,0,530,0,2),
+(34,'2023-05-19 16:56:20','172.26.12.139',NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(35,'2023-05-19 16:58:30','172.26.12.139',NULL,NULL,0,'0',1,0,0,0,321,0,0),
+(36,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(37,'2023-05-23 12:25:43','172.26.12.139',1600,1700,51,'15',7,21,71,0,3399,5,75),
+(38,'2023-05-19 19:34:24','172.26.12.139',403,403,0,'0',2,0,0,0,517,0,0),
+(39,'2023-05-21 00:05:09','172.26.12.139',2453,2453,0,'0',1,0,0,0,2453,0,0),
+(40,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(41,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(42,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(43,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(44,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(45,'2023-05-24 16:38:37','172.26.12.139',NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(46,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(49,NULL,NULL,NULL,NULL,0,'0',0,0,0,0,0,0,0),
+(50,'2023-05-24 17:48:21','172.26.12.139',NULL,NULL,3,'1',1,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `user_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,7 +598,25 @@ INSERT INTO `user_amount` VALUES
 (13,0),
 (15,0),
 (16,0),
-(27,0);
+(27,0),
+(28,0),
+(29,0),
+(33,0),
+(34,0),
+(35,0),
+(36,0),
+(37,0),
+(38,0),
+(39,0),
+(40,0),
+(41,0),
+(42,0),
+(43,0),
+(44,0),
+(45,0),
+(46,0),
+(49,0),
+(50,0);
 /*!40000 ALTER TABLE `user_amount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -586,4 +660,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19  0:46:24
+-- Dump completed on 2023-05-26  7:54:21

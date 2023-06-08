@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ddbb38d83f14c4fa8a0bee62c1f00a, type: 3}
+  m_Name: Wood Pickaxe
+  m_EditorClassIdentifier: 
+  itemName: Wood Pickaxe
+  itemDescription: "\uB3CC\uC744 \uCE90\uAE30 \uC801\uD569\uD55C \uB098\uBB34 \uACE1\uAD2D\uC774"
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: b873dfe05b63057488b7884b403f762a, type: 3}
+  itemPrefab: {fileID: 7793080230965434745, guid: f0d38977b1af0aa409f3655164ba62d0,
+    type: 3}
+  itemMaxCount: 1
+  itemOrder: 0
+  weaponType: 

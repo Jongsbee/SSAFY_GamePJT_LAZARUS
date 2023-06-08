@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ddbb38d83f14c4fa8a0bee62c1f00a, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: 
+  itemName: Campfire
+  itemDescription: "\uCEA0\uD504\uD30C\uC774\uC5B4 \uD0A4\uD2B8, \uC124\uCE58\uD558\uBA74
+    \uC8FC\uBCC0\uC5D0 \uBAB9\uC774 \uC624\uC9C0\uC54A\uB294\uB2E4."
+  itemType: 3
+  itemImage: {fileID: 21300000, guid: 98993bf1f18894c42b265b403f0bef3c, type: 3}
+  itemPrefab: {fileID: 4759147858168796439, guid: cf86d53a06613904089834f4eec0685f,
+    type: 3}
+  itemMaxCount: 1
+  itemOrder: 0
+  weaponType: 

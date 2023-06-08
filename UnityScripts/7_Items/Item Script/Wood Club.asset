@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ddbb38d83f14c4fa8a0bee62c1f00a, type: 3}
+  m_Name: Wood Club
+  m_EditorClassIdentifier: 
+  itemName: Wood Club
+  itemDescription: "\uBB35\uC9C1\uD55C \uBABD\uB465\uC774"
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: 6cef49dd8f4640142a376064b349f3ac, type: 3}
+  itemPrefab: {fileID: 2709697253654942787, guid: 7281a094ba34daa4fafcffe0c6a0001f,
+    type: 3}
+  itemMaxCount: 1
+  itemOrder: 0
+  weaponType: 
